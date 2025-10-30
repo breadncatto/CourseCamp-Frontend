@@ -1,0 +1,150 @@
+.register-page {
+  background-color: #f5f8fb;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Montserrat", sans-serif;
+}
+
+.register-box {
+  background: white;
+  padding: 48px 40px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  width: 380px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+/* Logo */
+.register-logo .logo-img {
+  height: 70px;
+  margin-bottom: 16px;
+}
+
+/* Heading */
+.register-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+/* Form */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.register-form input {
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 24px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.register-form input:focus {
+  border-color: #5b84c1;
+}
+
+.btn-email {
+  background-color: #ffab91;
+  color: #000;
+  font-weight: 600;
+  border: none;
+  border-radius: 24px;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-email:hover {
+  background-color: #ffa07a;
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  color: #888;
+  font-size: 14px;
+}
+
+.divider span {
+  padding: 0 8px;
+  background: #fff;
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  height: 1px;
+  background: #ccc;
+  flex: 1;
+}
+
+/* Google Button */
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 0;
+  background-color: #5b84c1;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-google:hover {
+  background-color: #476ea3;
+}
+
+/* Logo Google trong vòng tròn trắng */
+.google-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: white;
+  padding: 3px;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Links */
+.register-links {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.register-links a {
+  color: #5b84c1;
+  text-decoration: none;
+}
+
+.register-links a:hover {
+  text-decoration: underline;
+}
+
+.terms {
+  color: #777;
+  font-size: 13px;
+  margin-top: 12px;
+  line-height: 1.5;
+}
+
+.terms.small {
+  font-size: 12px;
+  opacity: 0.8;
+}

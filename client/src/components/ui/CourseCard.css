@@ -1,0 +1,63 @@
+/* Khung ngoài: kéo dài hết bề ngang vùng chứa */
+.courselist-card {
+  width: 1000px;           
+  box-sizing: border-box;    
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  padding: 24px 32px;        /* padding gọn */
+  transition: 0.3s;
+}
+
+.course-card:hover {
+  transform: translateY(-3px);
+}
+
+/* Hàng flex thực sự của card: text trái, ảnh phải */
+.card-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+/* Cột text chiếm phần còn lại */
+.card-text {
+  flex: 1;
+  min-width: 0;              /* tránh tràn khi tiêu đề dài */
+}
+
+/* Tiêu đề, phụ đề, giá & tag giữ như bạn đang có */
+.course-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #111;
+}
+.course-instructor {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 4px;
+}
+.course-price {
+  font-weight: 600;
+  color: #5b84c1;
+  margin-bottom: 10px;
+}
+.course-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tag {
+  background: #eaeaea;
+  color: #333;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.courselist-image {
+    width: 270px;
+    border-radius: 5%;
+}

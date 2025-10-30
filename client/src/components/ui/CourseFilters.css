@@ -1,0 +1,141 @@
+/* Tổng container */
+.filter-box {
+  width: 220px;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  padding: 18px 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  font-family: "Inter", sans-serif;
+  max-height: 720px; /* 🔹 Giới hạn chiều cao */
+  overflow-y: auto;  /* 🔹 Cho phép cuộn nếu quá dài */
+}
+
+/* Cuộn mượt và thanh nhỏ */
+.filter-box::-webkit-scrollbar {
+  width: 6px;
+}
+.filter-box::-webkit-scrollbar-thumb {
+  background: #cfcfcf;
+  border-radius: 4px;
+}
+.filter-box::-webkit-scrollbar-thumb:hover {
+  background: #b5b5b5;
+}
+
+/* Header */
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  position: sticky;      /* 🔹 Giữ header cố định khi cuộn */
+  top: 0;
+  background: #fff;
+  padding-bottom: 6px;
+  z-index: 1;
+}
+
+.filter-header h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+}
+
+.clear-btn {
+  background: none;
+  border: 1px solid #5b84c1;
+  color: #5b84c1;
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.clear-btn:hover {
+  background: #5b84c1;
+  color: white;
+}
+
+/* Section */
+.filter-section {
+  margin-top: 16px;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 12px;
+}
+
+.filter-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #444;
+}
+
+.filter-title span {
+  font-size: 12px;
+  color: #888;
+}
+
+/* Search box */
+.topic-search {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  outline: none;
+  font-size: 14px;
+}
+
+.topic-search:focus {
+  border-color: #5b84c1;
+}
+
+/* Checkbox list */
+.topic-items,
+.levels-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 180px;  /* 🔹 Giới hạn phần list riêng */
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Scrollbar mảnh cho các list */
+.topic-items::-webkit-scrollbar,
+.levels-list::-webkit-scrollbar {
+  width: 5px;
+}
+.topic-items::-webkit-scrollbar-thumb,
+.levels-list::-webkit-scrollbar-thumb {
+  background-color: #d0d0d0;
+  border-radius: 3px;
+}
+
+/* Checkbox item */
+.checkbox-item {
+  font-size: 14px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.checkbox-item input[type="checkbox"] {
+  accent-color: #5b84c1;
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.checkbox-item:hover {
+  background: #f8faff;
+  border-radius: 4px;
+  padding-left: 2px;
+}

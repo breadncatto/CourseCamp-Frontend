@@ -1,0 +1,117 @@
+/* ====== Tổng thể ====== */
+.course-page {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  font-family: "Montserrat", sans-serif;
+}
+
+.course-header {
+  background: white;
+  border-bottom: 1px solid #ddd;
+  padding: 24px 0;
+  text-align: center;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo {
+  height: 100px;
+  object-fit: contain;
+}
+
+/* ====== Thanh Search ====== */
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 50px;
+  width: 360px;
+  height: 50px;
+  padding-left: 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 16px;
+  color: #333;
+  font-family: "Montserrat", sans-serif;
+}
+
+.search-btn {
+  width: 50px;
+  height: 50px;
+  background: #5b84c1;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.search-btn:hover {
+  background: #4a75b5;
+  transform: scale(1.05);
+}
+
+.search-icon {
+  width: 22px;
+  height: 22px;
+  color: white;
+  stroke-width: 2.3;
+}
+
+/* ====== Bố cục chính ====== */
+.main-content {
+  display: flex;
+  gap: 32px;
+  padding: 40px 80px;
+  margin: 0 auto;
+  width: px;          /* ✅ cho phép full chiều ngang */
+  max-width: none;      /* ✅ bỏ giới hạn 1280px */
+}
+
+.filters-section {
+  flex: 0 0 260px;
+}
+
+.courses-section {
+  flex: 1;
+}
+
+/* ====== Header Courses ====== */
+.courses-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.courses-header h2 {
+  font-size: 28px;
+  color: #222;
+}
+
+.result-count {
+  color: #666;
+  font-size: 15px;
+}
+
+/* ====== Danh sách khoá học ====== */
+.courses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
