@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My course</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+</head>
+<body>
+    <header class="profile-header">
+        <div class="header-left">
+            <div class="logo">
+                <img src="images/CourseCampLogo.png" alt="CourseCamp Logo">
+            </div>
+            <span><p id="ptitle">My course</p></span>
+        </div>
+        
+        <div class="user-menu">
+            <span>Jurica Koletic</span>
+            <img src="images/Avatar Profile Example.png" alt="User Avatar" class="avatar" title="Your profile">
+            <a href="#" title="Home"><span class="material-icons-outlined">home</span></a>
+            <a href="#" title="Logout"><span class="material-icons-outlined">logout</span></a>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="profile-sidebar">
+            <a href="Student's Profile.html">
+                <span class="material-icons-outlined">person_outline</span>
+                <span class="sidebar-text">My Profile</span>
+            </a>
+            <a href="Studen's MyCourse.html" class="active"> 
+                <span class="material-icons-outlined">school</span>
+                <span class="sidebar-text">My Courses</span>
+            </a>
+            <a href="#">
+                <span class="material-icons-outlined">settings</span>
+                <span class="sidebar-text">Setting</span>
+            </a>
+        </aside>
+
+        <main>
+            <h2>My Courses</h2>
+            
+            <div class="course-list">
+            
+                <!-- Card 1: Python -->
+                <div class="course-card">
+                    
+                    <!-- BOX 1A: Course Content (Default) -->
+                    <div class="course-content-wrapper">
+                        <img src="images/Python course banner.png" alt="Python course banner">
+                        <div class="card-content">
+                            <div class="card-tags">
+                                <span class="tag-topic">PROGRAMMING</span>
+                                <span class="tag-level">Beginner</span>
+                            </div>
+                            <h3>Intro to Python</h3>
+                            
+                            <!-- PROGRESS BAR -->
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 70%;"></div>
+                            </div>
+                            <span class="progress-text">70%</span>
+                            
+                            <!-- REVIEW BUTTON -->
+                            <div class="card-footer-student">
+                                <button class="btn-review">Review</button>
+                            </div>
+                        </div>
+                    </div> <!-- End 1A -->
+                    
+                    <!-- BOX 1B: Feedback Form (Hidden) -->
+                    <div class="feedback-form-wrapper hidden">
+                        <div class="feedback-card">
+                            <h4>Share your feedback</h4>
+                            <p>How do you rate the quality of this course?</p>
+                            <div class="star-rating">
+                                <span class="material-icons-outlined">star_outline</span>
+                                <span class="material-icons-outlined">star_outline</span>
+                                <span class="material-icons-outlined">star_outline</span>
+                                <span class="material-icons-outlined">star_outline</span>
+                                <span class="material-icons-outlined">star_outline</span>
+                            </div>
+                            <p>Can you tell us more?</p>
+                            <div class="form-group">
+                                <textarea rows="4" placeholder="Write your feedback here..."></textarea>
+                            </div>
+                            <div class="form-actions" style="justify-content: center;">
+                                <button type="button" class="btn-back btn-secondary">Back</button>
+                                <button type="submit" class="btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </div> <!-- End 1B -->
+                    
+                </div> <!-- End Card 1 -->
+                
+                <!-- Card 2: React -->
+                <div class="course-card">
+                    <div class="course-content-wrapper">
+                        <img src="images/React course banner.png" alt="React course banner">
+                        <div class="card-content">
+                            <div class="card-tags">
+                                <span class="tag-topic">FRONTEND</span>
+                                <span class="tag-level">Intermediate</span>
+                            </div>
+                            <h3>Web UI with React</h3>
+                            
+                            <!-- PROGRESS BAR -->
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 20%;"></div>
+                            </div>
+                            <span class="progress-text">20%</span>
+                            
+                            <!-- REVIEW BUTTON -->
+                            <div class="card-footer-student">
+                                <button class="btn-review">Review</button>
+                            </div>
+                        </div>
+                    </div> <!-- End 2A -->
+                    
+                    <!-- BOX 2B: Feedback Form (Hidden) -->
+                    <div class="feedback-form-wrapper hidden">
+                        <div class="feedback-card">
+                            <h4>Share your feedback</h4>
+                            <p>How do you rate the quality of this course?</p>
+                            <div class="star-rating">
+                                <span class="material-icons-outlined">star_outline</span>
+                                <span class="material-icons-outlined">star_outline</span>
+                                <span class="material-icons-outlined">star_outline</span>
+                                <span class="material-icons-outlined">star_outline</span>
+                                <span class="material-icons-outlined">star_outline</span>
+                            </div>
+                            <p>Can you tell us more?</p>
+                            <div class="form-group">
+                                <textarea rows="4" placeholder="Write your feedback here..."></textarea>
+                            </div>
+                            <div class="form-actions" style="justify-content: center;">
+                                <button type="button" class="btn-back btn-secondary">Back</button>
+                                <button type="submit" class="btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </div> <!-- End 2B -->
+
+                </div> <!-- End Card 2 -->
+                
+            </div> <!-- End .course-list -->
+            
+        </main>
+        
+    </div> 
+
+
+
+
+
+    <footer>
+        <div class="footer-main">
+            <div class="footer-col footer-about">
+                <img src="images/CourseCampLogo.png" title="CourseCamp Logo">
+                <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+            </div>
+            <div class="footer-col footer-links">
+                <h4>Quick Links</h4>
+                <a href="#">Home</a>
+                <a href="#">About Us</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="footer-col footer-subscribe">
+                <h4>Subscribe to our newsletter</h4>
+                <p>The latest news, articles, and resources, sent to your inbox weekly.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright 2025 © Course Camp. All Right Reserved.</p>
+        </div>
+    </footer>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const reviewButtons = document.querySelectorAll('.btn-review');
+            const backButtons = document.querySelectorAll('.btn-back');
+
+            //Gán sự kiện cho các nút "Review"
+            reviewButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    // Tìm thẻ card cha gần nhất
+                    const card = button.closest('.course-card');
+                    
+                    if (card) {
+                        const contentWrapper = card.querySelector('.course-content-wrapper');
+                        const feedbackWrapper = card.querySelector('.feedback-form-wrapper');
+                        
+                        if (contentWrapper) contentWrapper.classList.add('hidden');
+                        if (feedbackWrapper) feedbackWrapper.classList.remove('hidden');
+                    }
+                });
+            });
+            
+            //Gán sự kiện cho các nút "Back"
+            backButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    // Tìm thẻ card cha gần nhất
+                    const card = button.closest('.course-card');
+                    
+                    if (card) {
+                        const contentWrapper = card.querySelector('.course-content-wrapper');
+                        const feedbackWrapper = card.querySelector('.feedback-form-wrapper');
+                        
+                        if (feedbackWrapper) feedbackWrapper.classList.add('hidden');
+                        if (contentWrapper) contentWrapper.classList.remove('hidden');
+                    }
+                });
+            });
+
+            
+            const allStarRatings = document.querySelectorAll('.star-rating');
+            
+            allStarRatings.forEach(function(rating) {
+                const stars = rating.querySelectorAll('span');
+                
+                stars.forEach(function(star, clickedIndex) {
+                    star.addEventListener('click', function() {
+                        // Reset tất cả các sao CHỈ TRONG PHẠM VI NÀY
+                        stars.forEach(function(s) {
+                            s.textContent = 'star_outline'; // Đặt lại là sao rỗng
+                            s.classList.remove('filled');
+                        });
+                        
+                        // Tô màu các sao từ đầu đến sao được nhấp
+                        for (let i = 0; i <= clickedIndex; i++) {
+                            stars[i].textContent = 'star'; // Đặt là sao đầy
+                            stars[i].classList.add('filled');
+                        }
+                    });
+                });
+            });
+
+        });
+    </script>
+
+</body>
+</html>

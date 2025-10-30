@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+</head>
+<body>
+    <header class="profile-header">
+        <div class="header-left">
+            <div class="logo">
+                <img src="images/CourseCampLogo.png"  alt="CourseCamp Logo">
+            </div>
+            <span><p id="ptitle">Profile</p></span>
+        </div>
+        
+        <div class="user-menu">
+            <span>Jurica Koletic</span>
+            <img src="images/Avatar Profile Example.png" alt="User Avatar" class="avatar" title="Your profile">
+            <a href="#" title="Home"><span class="material-icons-outlined">home</span></a>
+            <a href="#" title="Logout"><span class="material-icons-outlined">logout</span></a>
+        </div>
+    </header>
+
+    <div class="main-container">
+
+        <aside class="profile-sidebar">
+        <a href="Student's Profile.html" class="active">
+            <span class="material-icons-outlined">person_outline</span>My Profile </a>
+        <a href="Studen's MyCourse.html"><span class="material-icons-outlined">school</span>My courses</a>
+        <a href="#"><span class="material-icons-outlined">settings</span>Setting</a>
+        </aside>
+
+        <main class="profile-main">
+        
+            <div class="profile-banner"></div>
+            
+            <div class="profile-content-wrapper">
+            
+                <div class="profile-info-card">
+                    <img src="images/Avatar Profile Example.png" alt="User Avatar" class="profile-avatar">
+                    <h3>Jurica Koletic</h3>
+                    <p>Beginner</p>
+                </div>
+                
+                <div class="profile-form-card">
+                    <h4>Account Information</h4>
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="first-name">First Name</label>
+                                <input type="text" id="first-name" value="Jurica">
+                            </div>
+                            <div class="form-group">
+                                <label for="last-name">Last Name</label>
+                                <input type="text" id="last-name" value="Koletic">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="text" id="phone" value="+1800-1892">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" value="juricakoletic@gmail.com">
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions" style="margin-top: 2rem;">
+                            <button type="submit" class="btn-primary">Update</button>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        </main>
+        
+    </div> <footer>
+        <div class="footer-main">
+            <div class="footer-col footer-about">
+                <img src="images/CourseCampLogo.png" title="CourseCamp Logo">
+                <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+            </div>
+            <div class="footer-col footer-links">
+                <h4>Quick Links</h4>
+                <a href="#">Home</a>
+                <a href="#">About Us</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="footer-col footer-subscribe">
+                <h4>Subscribe to our newsletter</h4>
+                <p>The latest news, articles, and resources, sent to your inbox weekly.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright 2025 © Course Camp. All Right Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
