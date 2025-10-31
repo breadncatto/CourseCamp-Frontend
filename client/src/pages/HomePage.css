@@ -253,6 +253,26 @@
   font-size: 18px;
 }
 
+
+.all-btn {
+  display: flex;
+  width: 200px;
+  height: 50px;
+  background: #5b84c1;
+  border: none;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center; /* center the content inside the button */
+  margin: 0 auto;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.all-btn:hover {
+  background: #4a75b5;
+  transform: scale(1.05);
+}
+
 .course-footer {
   display: flex;
   justify-content: space-between;
@@ -327,60 +347,3 @@ margin-bottom: 4px;
   margin-top: auto;
   font-weight: 500;
 }
-
-/* Footer */
-.footer {
-  background: #121a25;
-  color: white;
-  padding-left: 0px;
-  padding-bottom: 50px;
-  padding-top: 30px;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 40px;
-  align-items: flex-start; 
-  margin-top: 150px;
-}
-
-.footer-col:nth-child(2),
-.footer-col:nth-child(3) {
-
-  margin-top: 25px;     /* 🔹 hoặc 25–30px nếu muốn thấp hơn */
-}
-
-.footer-col {
-  max-width: 240px;
-  display: flex;                    /* 🟢 Cho phép xếp các phần tử theo cột */
-  flex-direction: column;           /* 🟢 Đảm bảo Home/About/Contact xuống dòng */
-  gap: 12px;
-
-}
-
-.footer-col:first-child .logo {
-  transform: translateX(-30px); /* 🔹 Xích qua trái 40px (tuỳ chỉnh) */
-}
-
-.footer-col a {
-  color: #93c5fd;                   /* 🔹 Màu nhẹ hơn */
-  text-decoration: none;
-}
-
-.footer-col a:hover {
-  text-decoration: underline;       /* 🔹 Hiệu ứng hover */
-}
-
-.footer input {
-  padding: 8px;
-  width: 100%;
-  border-radius: 8px;
-  border: none;
-  margin-top: 8px;
-}
-
-.footer .btn.primary {
-  margin-top: 3px;
-  width: 100%;
-}
-
-

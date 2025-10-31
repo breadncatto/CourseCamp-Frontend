@@ -1,7 +1,14 @@
+/* NOTE */
+//TODO
+/*
+  - Sau này thêm nghiệp vụ xử lý đăng nhập, lưu trữ token.
+  - Thêm đăng nhập OAuth vào dự án hệ thống.
+ */
 import React from "react";
 import "./Login.css";
 import logo from "../assets/logo-coursecamp.png";
 import googleLogo from "../assets/logo-google.png"; // ✅ thêm dòng này
+import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
@@ -41,7 +48,7 @@ const Login = () => {
         {/* Links */}
         <div className="login-links">
           <p>
-            Don’t have an account? <a href="#">Register</a>
+            Don't have an account? <Link to="/register"><a href="Register.jsx">Register</a></Link>
           </p>
           <a href="#">Forgot your password?</a>
         </div>

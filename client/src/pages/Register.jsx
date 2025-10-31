@@ -1,7 +1,14 @@
+//TODO
+/*
+  - Cập nhật thêm state để chứa thông tin từ form gửi về cho server
+  - Thêm state để kiểm tra lại password.
+  - Đăng ký thành công sẽ tạo token, chuyển hướng sang trang homepage
+*/
 import React from "react";
 import "./Register.css";
 import logo from "../assets/logo-coursecamp.png";
 import googleLogo from "../assets/logo-google.png";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   return (
@@ -40,7 +47,7 @@ const Register = () => {
         {/* Links */}
         <div className="register-links">
           <p>
-            Already have an account? <a href="#">Log in</a>
+            Already have an account? <Link to="/login"><a>Log in</a></Link>
           </p>
 
           <p className="terms">

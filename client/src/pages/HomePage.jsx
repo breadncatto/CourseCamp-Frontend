@@ -2,6 +2,8 @@ import React from "react";
 import "./HomePage.css";
 import logoCourseCamp from "../assets/logo-coursecamp.png";
 import { Search, BookOpen, GraduationCap, Users, Clock, CheckCircle, Award, Headphones, Play } from "lucide-react";
+import { Link } from "react-router-dom";
+import Footer from "../components/ui/Footer";
 
 const HomePage = () => {
   const stats = [
@@ -98,8 +100,12 @@ const HomePage = () => {
           <img src={logoCourseCamp} alt="CourseCamp" className="logo" />
         </div>
         <div className="nav-right">
-          <button className="btn primary">Khám phá khóa học</button>
-          <button className="btn secondary">Đăng nhập</button>
+          <Link to="/course-list">
+            <button className="btn primary">Khám phá khóa học</button>
+          </Link>
+          <Link to="/login">
+            <button className="btn secondary">Đăng nhập</button>
+          </Link>
           <img
             className="avatar"
             src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=80&h=80&fit=crop"
@@ -154,12 +160,13 @@ const HomePage = () => {
                 <p>{c.description}</p>
                 <div className="course-footer">
                   <span className="price">{c.price}</span>
-                  <button className="btn small">Details</button>
+                  <Link to="/course/:id"><button className="btn small">Details</button></Link>
                 </div>
               </div>
             </div>
           ))}
         </div>
+        <Link to="/course-list"><button className="all-btn">Tất cả khóa học</button></Link>
       </section>
 
       {/* Testimonials */}
@@ -183,23 +190,7 @@ const HomePage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="footer">
-        <div className="footer-col">
-          <img src={logoCourseCamp} alt="logo" className="logo" />
-          <p>Keep learning, stay curious. CourseCamp © 2025.</p>
-        </div>
-        <div className="footer-col">
-          <h4>Quick Links</h4>
-          <a href="#">Home</a>
-          <a href="#">About Us</a>
-          <a href="#">Contact</a>
-        </div>
-        <div className="footer-col">
-          <h4>Subscribe</h4>
-          <input type="email" placeholder="Enter your email" />
-          <button className="btn primary">Subscribe</button>
-        </div>
-      </footer>
+      <Footer/>
     </div>
   );
 };

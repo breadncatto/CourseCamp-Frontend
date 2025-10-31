@@ -1,6 +1,12 @@
+//TODO:
+/*
+  - Thêm vào props cho function CourseDetail để nhận bất kỳ một khóa học nào sẽ trả về nó
+ */
 import React from "react";
 import "./CourseDetail.css";
 import logoCourseCamp from "../assets/logo-coursecamp.png";
+import Footer from "../components/ui/Footer";
+import { Link } from "react-router-dom";
 
 const CourseDetail = () => {
   const course = {
@@ -23,7 +29,7 @@ const CourseDetail = () => {
     <div className="coursedetail-page">
       {/* Header */}
       <header className="coursedetail-header">
-        <img src={logoCourseCamp} alt="CourseCamp" className="logo" />
+        <Link to="/"><img src={logoCourseCamp} alt="CourseCamp" className="logo" /></Link>
       </header>
 
       {/* Hero */}
@@ -99,41 +105,7 @@ const CourseDetail = () => {
       </section>
 
       {/* Footer */}
-      <footer className="coursedetail-footer">
-        <div className="footer-grid">
-          <div className="footer-col">
-            <img
-              src={logoCourseCamp}
-              alt="CourseCamp"
-              className="footer-logo"
-            />
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text.
-            </p>
-          </div>
-          <div className="footer-col">
-            <h3>Subscribe to our newsletter</h3>
-            <p>
-              The latest news, articles, and resources, sent to your inbox
-              weekly.
-            </p>
-            <div className="subscribe-box">
-              <input type="email" placeholder="Enter your email" />
-              <button className="btn secondary">Subscribe</button>
-            </div>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <div className="footer-links">
-            <a href="#">Home</a>
-            <a href="#">About Us</a>
-            <a href="#">Contact Us</a>
-            <a href="#">Privacy Policy</a>
-          </div>
-          <p>Copyright 2025 © Course Camp. All Rights Reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

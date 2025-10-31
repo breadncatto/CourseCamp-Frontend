@@ -1,8 +1,10 @@
 import { useState } from "react";
 import "./CourseList.css";
 import logoCourseCamp from "../assets/logo-coursecamp.png";
-import CourseFilters from "../components/CourseFilters";
-import CourseCard from "../components/CourseCard";
+import CourseFilters from "../components/ui/CourseFilters.jsx";
+import CourseCard from "../components/ui/CourseCard.jsx";
+import { Link } from "react-router-dom";
+import Footer from "../components/ui/Footer.jsx";
 
 function CourseList() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -46,7 +48,9 @@ function CourseList() {
       {/* ---------- Header ---------- */}
       <header className="course-header">
         <div className="header-content">
-          <img src={logoCourseCamp} alt="CourseCamp" className="logo" />
+          <Link to="/">
+            <img src={logoCourseCamp} alt="CourseCamp" className="logo" />
+          </Link>
 
           <div className="search-bar">
             <input
@@ -97,6 +101,9 @@ function CourseList() {
           </div>
         </section>
       </main>
+
+      {/* ------------Footer----------*/}
+      <Footer/>
     </div>
   );
 }

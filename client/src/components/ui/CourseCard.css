@@ -9,7 +9,7 @@
   transition: 0.3s;
 }
 
-.course-card:hover {
+.courselist-card:hover {
   transform: translateY(-3px);
 }
 

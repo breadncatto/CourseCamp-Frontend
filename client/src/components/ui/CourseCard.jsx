@@ -16,6 +16,7 @@ function CourseCard({ course }) {
           </div>
         </div>
         <img src={course.image} alt={course.title} className="courselist-image" />
+        <button className="btn btn-primary"> Detail</button>
       </div>
     </div>
   );

@@ -4,10 +4,23 @@ import HomePage from "./pages/HomePage";
 import CourseDetail from "./pages/CourseDetail";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import { Route, Routes } from "react-router-dom";
 function App() {
   return (
     <div>
-      <Login />
+      {/* <Login /> */}
+      {/* <Register /> */}
+      {/* <CourseDetail /> */}
+      {/* <HomePage /> */}
+      {/* <CourseList /> */}
+      {/* Phan Route cho tung page: */}
+      <Routes>
+        <Route path="/" element={<HomePage/>}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/register" element={<Register/>}/>
+        <Route path="/course/:id" element={<CourseDetail/>}/>
+        <Route path="/course-list" element={<CourseList/>}/>
+      </Routes>
     </div>
   );
 }
