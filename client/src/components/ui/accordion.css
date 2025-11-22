@@ -1,0 +1,56 @@
+/* CONTAINER */
+.accordion {
+  width: 100%;
+}
+
+/* ITEM */
+.accordion-item {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.accordion-item:last-child {
+  border-bottom: none;
+}
+
+/* TRIGGER (nút mở ra) */
+.accordion-trigger {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 14px 0;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.accordion-trigger:hover {
+  text-decoration: underline;
+}
+
+/* ICON */
+.accordion-icon {
+  width: 16px;
+  height: 16px;
+  color: #888;
+  transition: transform 0.2s ease;
+}
+
+.accordion-trigger[data-state="open"] .accordion-icon {
+  transform: rotate(180deg);
+}
+
+/* CONTENT */
+.accordion-content {
+  overflow: hidden;
+  font-size: 14px;
+}
+
+.accordion-inner {
+  padding: 6px 0 14px;
+  color: #555;
+}

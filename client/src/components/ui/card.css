@@ -1,0 +1,49 @@
+.card {
+  background: var(--card, #fff);
+  color: var(--card-foreground, #111);
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* HEADER */
+.card-header {
+  padding: 20px 24px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.card-description {
+  font-size: 14px;
+  color: #666;
+}
+
+/* CONTENT */
+.card-content {
+  padding: 0 24px 20px;
+}
+
+/* FOOTER */
+.card-footer {
+  padding: 12px 24px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-top: 1px solid #eee;
+}
+
+/* ACTION (nút góc) */
+.card-action {
+  align-self: flex-end;
+  padding-right: 24px;
+  padding-top: 12px;
+}
