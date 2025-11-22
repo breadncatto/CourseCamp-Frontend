@@ -400,3 +400,97 @@
   font-size: 13px;
   color: #8a96a3;               /* 🔥 chữ xám mờ */
 }
+/* ==== FIX HERO BỊ TRỐNG VÀ TRÀN FULL ==== */
+.coursedetail-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 70px 20px;
+  text-align: left;
+}
+
+.coursedetail-hero h1 {
+  font-size: 46px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.coursedetail-hero .price {
+  font-size: 22px;
+  opacity: 0.9;
+}
+
+/* nút enroll gọn lại */
+.coursedetail-hero .btn.primary {
+  background: white;
+  color: #5b84c1;
+  padding: 10px 26px;
+  font-size: 15px;
+  border-radius: 10px;
+}
+
+/* 🌊 Hero full width style */
+.hero-course {
+  background: #5b84c1;   /* xanh */
+  color: white;
+  width: 100%;
+  display: block;
+}
+
+/* 🔵 Nút enroll */
+.hero-enroll-btn {
+  background: #fff !important;
+  color: #5b84c1 !important;
+  padding: 12px 32px;
+  border-radius: 50px;
+  font-weight: 600;
+}
+
+.hero-enroll-btn:hover {
+  background: #e6ecf3 !important;
+  color: #456fa3 !important;
+}
+/* === HERO FULL CENTER === */
+.hero-course {
+  padding-top: 30px;   /* tăng padding trên */
+  padding-bottom: 40px; /* tăng padding dưới */
+  background: var(--primary);
+  color: white;
+  width: 100%;
+  display: flex;
+  justify-content: center;   /* 💎 Căn giữa ngang */
+  align-items: center;       /* 💎 Căn giữa theo trục dọc (nếu cao) */
+  text-align: center;
+}
+
+/* === Fix container không lệch trái phải === */
+.hero-course .container {
+  max-width: 900px;         /* 🔥 Giới hạn nội dung cho đẹp */
+  width: 100%;
+  margin: 0 auto;           /* 🔥 Bắt buộc căn giữa */
+}
+
+/* === Fix nút enroll cho ra giữa chính xác === */
+.hero-enroll-btn {
+  display: inline-block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.hero-course .enrolled-status {
+  font-size: 13px;        /* giảm font */
+  opacity: 0.9;           /* mờ 90% */
+  color: rgba(255, 255, 255, 0.9); /* trắng mờ */
+  margin-top: 10px;
+}
+
+.hero-course .course-price {
+    padding-top: 10px;
+    color: white;  
+    font: Montserrat;
+}
+.lecture-count {
+  display: inline-block;
+  margin-right: 150px !important;  /* 🔥 cách mép phải 150px */
+}

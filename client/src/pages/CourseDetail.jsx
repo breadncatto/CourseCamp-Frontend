@@ -67,18 +67,27 @@ const CourseDetail = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4 py-16">
+      <section className="hero-course flex justify-center items-center text-center">
+        <div className="px-4 py-16 text-white max-w-3xl">
           <h1 className="text-5xl font-bold mb-4">{course.title}</h1>
-          <p className="text-xl mb-6 italic">{course.price}</p>
-          <Button size="lg" className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-semibold mb-4">
+
+          <p className="course-price">{course.price}</p>
+
+          <Button
+            size="lg"
+            className="hero-enroll-btn font-semibold px-8 py-3 rounded-full mx-auto"
+          >
             Enroll now
           </Button>
-          <p className="text-sm">
+
+          <p className="enrolled-status">
             <span className="font-bold">{course.enrolled}</span> already enrolled
           </p>
         </div>
       </section>
+
+
+
 
       {/* Stats Section */}
       <section className="coursedetail-stats">
@@ -198,11 +207,6 @@ const CourseDetail = () => {
                     </div>
                   </div>
 
-                  <img 
-                    src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop"
-                    alt="Programming"
-                    className="rounded-lg shadow-lg w-full"
-                  />
                 </div>
               </TabsContent>
 
@@ -261,14 +265,20 @@ const CourseDetail = () => {
                     ✓ You're enrolled in this course!
                   </div>
                   
-                  <Button className="w-full" size="lg" variant="outline">Forum trao đổi</Button>
+                  <Button
+                    className="w-full border-orange-500 text-orange-500 hover:bg-orange-50"
+                    size="lg"
+                    variant="outline"
+                  >
+                    Forum trao đổi
+                  </Button>
 
                   <div className="space-y-3 pt-4 border-t">
                     <h3 className="font-semibold">Your Progress</h3>
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
                         <span>Completed</span>
-                        <span className="font-medium">0 of {course.totalLectures} lectures</span>
+                        <span className="font-medium lecture-count">0 of {course.totalLectures} lectures</span>
                       </div>
                       <div className="w-full h-2 bg-muted rounded-full">
                         <div className="h-full bg-primary rounded-full" style={{ width: '0%' }} />
