@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Lock, Clock, PlayCircle } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // UI components đúng import structure gốc của bạn
 import { Button } from "../components/ui/button";
@@ -12,10 +13,11 @@ import Footer from "../components/ui/Footer";
 import logoCourseCamp from "../assets/logo-coursecamp.png";
 import "./CourseDetail.css"; 
 
+
 const CourseDetail = () => {
   const { id } = useParams();
   const [isEnrolled, setIsEnrolled] = useState(false);
-
+  const navigate = useNavigate();
   // Mock course (sau này fetch API)
   const course = {
     id,
@@ -151,18 +153,29 @@ const CourseDetail = () => {
                         <AccordionContent>
                           <div className="space-y-2 pt-2">
                             {visibleLessons.map((lesson, idx) => (
-                              <div key={lesson.id}
-                                className={`lesson-row ${lesson.isLocked ? "locked" : "unlocked"} ${idx === 0 && !isEnrolled ? "active-lesson" : ""}`}>
+                              <div
+                                key={lesson.id}
+                                className={`lesson-row ${lesson.isLocked ? "locked" : "unlocked"} ${
+                                  idx === 0 && !isEnrolled ? "active-lesson" : ""
+                                }`}
+                                onClick={() => {
+                                    if (!lesson.isLocked) navigate(`/course/${id}/lesson/${lesson.id}`);
+                                }}
+                                style={{ cursor: lesson.isLocked ? "not-allowed" : "pointer" }}
+                              >
                                 <div className="lesson-left">
                                   {lesson.isLocked ? <Lock size={16} /> : <PlayCircle size={16} />}
                                   <span>{lesson.title}</span>
                                 </div>
+
                                 <div className="lesson-time">
                                   <Clock size={14} />
                                   <span>{lesson.duration}</span>
                                 </div>
                               </div>
                             ))}
+
+
 
                             {/* ==== LOCKED BOX ==== */}
                             {!isEnrolled && hiddenCount > 0 && (

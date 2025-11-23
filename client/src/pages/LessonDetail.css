@@ -1,0 +1,363 @@
+.lesson-wrapper {
+  background: #e9f4fb;
+  min-height: 100vh;
+  font-family: "Montserrat", sans-serif !important;
+}
+
+/* 🔙 Header */
+.lesson-header {
+  padding-bottom: 12px;
+  padding-top: 12px;
+  background: #ffffff;
+  border-bottom: 1px solid #dde8ef;
+}
+
+/* 🏷 Title */
+.lesson-top {
+  margin-bottom: 20px;
+}
+
+.lesson-title {
+  font-size: 30px;
+  font-weight: 700;
+  color: #1c3b52;
+}
+
+.lesson-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #4d6a7d;
+  font-size: 15px;
+}
+
+/* 📌 Tabs Style */
+.lesson-tabs {
+  background: #d5e7f2;
+  border-radius: 10px;
+  padding: 4px !important;
+  margin-bottom: 24px;
+}
+
+.lesson-tabs button {
+  background: transparent !important;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #4c6477;
+}
+
+.lesson-tabs button[data-state="active"] {
+  background: #ffffff !important;
+  color: #1e3f60 !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* 🎥 Video placeholder */
+.video-placeholder {
+  height: 360px;
+  background: #dceefb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 📄 Card Style */
+.lesson-card {
+  border-radius: 12px;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 4px;
+  width: 100%;  
+}
+
+/* 📎 Document Row */
+.doc-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;         /* 🔥 rộng hơn */
+  border: 1px solid #d9e7f2;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+  margin-bottom: 14px; 
+}
+
+.doc-item:hover {
+  background: #edf7ff;
+}
+
+.doc-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ⬇️ Download button */
+.download-btn {
+  border-radius: 8px !important;
+  border: 1px solid #c3d7e6 !important;
+  background: #f7fcff !important;
+  color: #1e3f60 !important;
+}
+
+.download-btn:hover {
+  background: #e1f1ff !important;
+}
+
+/* 📝 Assignment */
+.submit-btn {
+  background: #5b84c1 !important;
+  color: white !important;
+  border-radius: 8px !important;
+}
+
+.submit-btn:hover {
+  background: #43679c !important;
+}
+
+/* ========== FIX DOCUMENT CARD FULL WIDTH ========== */
+.lesson-doc-card .card-content {
+  width: 100%;
+  padding-left: 30px;
+  padding-right: 20px;
+}
+
+.doc-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px; /* khoảng cách giữa các mục */
+}
+
+/* mỗi dòng tài liệu */
+.doc-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #dce9f5;
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 10px;
+}
+
+.doc-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.doc-info p:first-child {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Nút tải xuống màu xanh */
+.download-btn {
+  background-color: #5b84c1;
+  color: white;
+  border-radius: 8px;
+  padding: 6px 20px;
+  font-weight: 600;
+}
+
+.download-btn:hover {
+  background-color: #43669b;
+  color: white;
+}
+
+/* ==== FIX TAB ALIGN + STYLE ==== */
+.lesson-tabs {
+  display: flex;
+  justify-content: flex-start;
+  gap: 40px;             /* 🔥 tạo khoản cách đều 3 tab */
+  background: #e8f3fa;   /* nền xanh nhạt */
+  border-radius: 12px;
+  padding: 14px 24px;
+  height: 55px;
+  align-items: center;   /* căn icon-text giữa theo chiều dọc */
+}
+
+/* Style từng Tab */
+.lesson-tabs button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #164b6a;
+  transition: 0.2s;
+}
+
+/* Tab Active */
+.lesson-tabs button[data-state="active"] {
+  background: #ffffff;
+  color: #164b6a;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Hover */
+.lesson-tabs button:hover {
+  background: #ffffffc2;
+}
+
+/* 🟦 Giữ khung nền tổng */
+.lesson-tabs {
+  background: #e8f3fb;
+  padding: 12px 16px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 60px; /* tùy chỉnh khoảng cách giữa tabs */
+}
+
+/* 🎯 Tab mặc định (chưa chọn) */
+.lesson-tabs button {
+  background: transparent;
+  border: 2px solid transparent;
+  padding: 10px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #0c3b5b;
+  transition: 0.2s;
+}
+
+/* 🟢 Hover nhẹ */
+.lesson-tabs button:hover {
+  background: rgba(255,255,255,0.4);
+}
+
+/* 🔵 Tab đang active */
+.lesson-tabs button[data-state="active"] {
+  background: #ffffff;
+  border-color: #d7e4ef; /* 🔥 trả lại border nhẹ */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.07);
+  color: #0c3b5b;
+}
+/* Căn icon + chữ trong Bài tập */
+.assignment-trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  width: 100%;
+}
+
+/* Fix khoảng cách nội dung bên trong accordion */
+.assignment-content {
+  padding-top: 10px;
+}
+
+/* Icon completed xanh */
+.assignment-icon-completed {
+  color: #28a745 !important;
+}
+
+/* Icon chưa hoàn thành màu xám */
+.assignment-icon-pending {
+  color: #6c7a86 !important;
+}
+/* === ICON HOÀN THÀNH === */
+.assignment-icon {
+  margin-right: 6px;          /* sát chữ hơn */
+  margin-left: 2px;
+  transition: 0.2s ease;
+}
+
+/* màu icon khi chưa hoàn thành */
+.assignment-icon.pending {
+  color: #999;               /* xám */
+}
+
+/* màu icon khi đã hoàn thành */
+.assignment-icon.completed {
+  color: #19a463;           /* xanh lá */
+  font-weight: 600;
+}
+
+/* === PHẦN BODY TRONG ACCORDION === */
+.assignment-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 6px;
+  padding-bottom: 10px;
+  padding-left: 2px;
+}
+
+/* Khoảng cách giữa due date & button */
+.due-date {
+  margin-bottom: 10px !important;
+}
+
+/* === NÚT === */
+.submit-btn {
+  margin-top: 8px;
+  background-color: #5b84c1;
+  color: #fff;
+  border-radius: 6px;
+  padding: 6px 16px;
+}
+
+.submit-btn:hover {
+  background-color: #43669b;
+}
+
+.done-btn {
+  color: #777;
+  border-color: #bbb;
+  background-color: #f3f3f3;
+  border-radius: 6px;
+  padding: 6px 16px;
+}
+
+/* 🔥 Nút đã hoàn thành (đậm viền + màu rõ hơn) */
+.done-btn {
+  margin-top: 8px;
+  background-color: #f2f4f7 !important;   /* nền xám nhạt */
+  color: #555 !important;                /* chữ đậm hơn */
+  border: 2px solid #d0d5da !important;  /* viền rõ */
+  border-radius: 8px !important;
+  font-weight: 600;
+  cursor: default;
+}
+
+.video-placeholder {
+  margin-top: 40px;
+  width: 745px;
+  height: 420px;             /* chiều cao lớn hơn cho cân đối */
+  background: #e6f3ff;       /* xanh nhạt */
+  display: flex;
+  justify-content: center;   /* căn giữa ngang */
+  align-items: center;       /* căn giữa dọc */
+  border-radius: 12px;
+  color: #587dad;
+  font-size: 16px;
+  font-weight: 500;
+  column-gap: 10px;          /* khoảng cách giữa icon và chữ */
+}
+/* 🎯 Căn giữa tiêu đề + thời gian trên */
+.lesson-top {
+  padding-top: 50px;
+  text-align: center;              /* căn giữa chữ */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;                        /* khoảng cách giữa tiêu đề & thời gian */
+  margin-bottom: 20px;
+}
+
+/* 🕒 chỉnh meta gọn và màu nhạt */
+.lesson-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #6b7a8c;                  /* xám sang */
+}
