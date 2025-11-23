@@ -274,24 +274,23 @@ const CourseDetail = () => {
                 </>
               ) : (
                 <div className="space-y-4">
-                  <div className="p-4 bg-green-50 rounded-lg border border-green-200 text-center font-semibold">
+                  <div className="check-icon">
                     ✓ You're enrolled in this course!
                   </div>
                   
                   <Button
-                    className="w-full border-orange-500 text-orange-500 hover:bg-orange-50"
+                    className="w-full forum-btn text-white font-semibold"
                     size="lg"
-                    variant="outline"
                   >
                     Forum trao đổi
                   </Button>
 
+
                   <div className="space-y-3 pt-4 border-t">
-                    <h3 className="font-semibold">Your Progress</h3>
+                    <h3 className="progress-title">Your Progress</h3>
                     <div className="space-y-2">
-                      <div className="flex justify-between text-sm">
-                        <span>Completed</span>
-                        <span className="font-medium lecture-count">0 of {course.totalLectures} lectures</span>
+                      <div className="progress-row">
+                        <span>Completed 0 of {course.totalLectures} lectures</span>
                       </div>
                       <div className="w-full h-2 bg-muted rounded-full">
                         <div className="h-full bg-primary rounded-full" style={{ width: '0%' }} />

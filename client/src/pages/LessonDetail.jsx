@@ -1,16 +1,27 @@
 import { useParams, Link } from "react-router-dom";
+import { useState } from "react";
 import { Button } from "../components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+  DialogClose
+} from "../components/ui/dialog";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
 import { ChevronLeft, FileText, Video, CheckSquare, Download, Clock } from "lucide-react";
-import Footer from "../components/ui/Footer"; 
+import Footer from "../components/ui/Footer";
 import "./LessonDetail.css";
 
 const LessonDetail = () => {
   const { courseId, lessonId } = useParams();
 
-  // 🔥 Mock data (thay bằng API sau)
+  // 🔥 Mock Data
   const lesson = {
     id: lessonId,
     title: "Introduction to React Hooks",
@@ -39,24 +50,40 @@ const LessonDetail = () => {
     ],
   };
 
+  // 🧠 STATES
+  const [assignmentsState, setAssignmentsState] = useState(lesson.assignments);
+  const [openUpload, setOpenUpload] = useState(false);
+  const [uploadFile, setUploadFile] = useState(null);
+
+  // 📌 Xử lý nộp bài
+  const handleSubmitAssignment = () => {
+    const id = openUpload;
+
+    setAssignmentsState(prev =>
+      prev.map(asg => (asg.id === id ? { ...asg, status: "completed" } : asg))
+    );
+
+    setOpenUpload(false);
+    setUploadFile(null);
+  };
+
   return (
     <div className="lesson-wrapper">
 
+      {/* 🔙 Header */}
       <header className="lesson-header sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
-            <Link to={`/course/${courseId}`}>
+          <Link to={`/course/${courseId}`}>
             <Button variant="ghost" size="sm" className="py-3">
-                <ChevronLeft className="mr-2 h-4 w-4" />
-                Quay lại khóa học
+              <ChevronLeft className="mr-2 h-4 w-4" />
+              Quay lại khóa học
             </Button>
-            </Link>
+          </Link>
         </div>
       </header>
 
-
       {/* 📚 Main */}
       <div className="container mx-auto px-4 py-8">
-
         {/* 🏷 Title */}
         <div className="lesson-top">
           <h1 className="lesson-title">{lesson.title}</h1>
@@ -126,60 +153,94 @@ const LessonDetail = () => {
                 <CardTitle>Bài tập</CardTitle>
                 <CardDescription>Hoàn thành các bài tập để củng cố kiến thức</CardDescription>
               </CardHeader>
+
               <CardContent>
                 <Accordion type="single" collapsible>
-                    {lesson.assignments.map((asg) => (
+                  {assignmentsState.map((asg) => (
                     <AccordionItem key={asg.id} value={`asg-${asg.id}`}>
-                        
-                        {/* Trigger Bài tập */}
-                        <AccordionTrigger className="assignment-trigger hover:no-underline">
+                      {/* Trigger Bài tập */}
+                      <AccordionTrigger className="assignment-trigger hover:no-underline">
                         <div className="assignment-header">
-                            <CheckSquare
+                          <CheckSquare
                             className={`h-5 w-5 assignment-icon ${
-                                asg.status === "completed" ? "completed" : "pending"
+                              asg.status === "completed" ? "completed" : "pending"
                             }`}
-                            />
-                            <span className="assignment-title">{asg.title}</span>
+                          />
+                          <span className="assignment-title">{asg.title}</span>
                         </div>
-                        </AccordionTrigger>
+                      </AccordionTrigger>
 
-
-                        {/* Nội dung bên trong */}
-                        <AccordionContent className="assignment-content">
+                      {/* Nội dung bên trong */}
+                      <AccordionContent className="assignment-content">
                         <div className="space-y-4">
-                            
-                            <p className="text-muted-foreground">{asg.description}</p>
+                          <p className="text-muted-foreground">{asg.description}</p>
 
-                            <div className="flex items-center justify-between">
+                          <div className="flex items-center justify-between">
                             <p className="text-sm text-muted-foreground">
-                                Hạn nộp: {asg.dueDate}
+                              Hạn nộp: {asg.dueDate}
                             </p>
 
                             {asg.status === "completed" ? (
-                            <Button variant="outline" disabled className="done-btn">
+                              <Button variant="outline" disabled className="done-btn">
                                 Đã hoàn thành
-                            </Button>
+                              </Button>
                             ) : (
-                            <Button className="submit-btn">Nộp bài</Button>
+                              <Button className="submit-btn" onClick={() => setOpenUpload(asg.id)}>
+                                Nộp bài
+                              </Button>
                             )}
-
-                            </div>
-
+                          </div>
                         </div>
-                        </AccordionContent>
-
+                      </AccordionContent>
                     </AccordionItem>
-                    ))}
+                  ))}
                 </Accordion>
-                </CardContent>
-
+              </CardContent>
             </Card>
-          </TabsContent>
 
+            {/* 📌 MODAL NỘP BÀI */}
+            <Dialog open={openUpload !== false} onOpenChange={setOpenUpload}>
+              <DialogContent className="max-w-md">
+                <DialogHeader>
+                  <DialogTitle>Nộp bài tập</DialogTitle>
+                </DialogHeader>
+
+                <div className="space-y-4">
+                  <p className="text-sm text-muted-foreground">
+                    Chọn file của bạn để nộp (PDF, ZIP, hình ảnh).
+                  </p>
+
+                  <input
+                    type="file"
+                    accept=".pdf,.zip,.jpg,.png"
+                    onChange={(e) => setUploadFile(e.target.files[0])}
+                    className="block w-full border border-gray-300 rounded-md p-2"
+                  />
+
+                  {uploadFile && (
+                    <p className="text-xs text-green-600">
+                      ✔ Đã chọn: <b>{uploadFile.name}</b>
+                    </p>
+                  )}
+                </div>
+
+                <DialogFooter>
+                  <Button variant="outline" onClick={() => setOpenUpload(false)}>
+                    Hủy
+                  </Button>
+
+                  <Button disabled={!uploadFile} onClick={handleSubmitAssignment}>
+                    Xác nhận nộp
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          </TabsContent>
         </Tabs>
       </div>
-    {/* Footer */}
-    <Footer/>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

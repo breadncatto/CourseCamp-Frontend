@@ -494,3 +494,55 @@
   display: inline-block;
   margin-right: 150px !important;  /* 🔥 cách mép phải 150px */
 }
+.forum-btn {
+  background-color: var(--secondary) !important;
+  border: none !important;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.forum-btn:hover {
+  background-color: #ff9673 !important; /* màu hover sậm hơn */
+}
+
+/* 📌 Style giống các dòng có dấu ✓ trong sidebar */
+
+.coursedetail-sidebar .check-icon {
+  color: #15803D;
+  font-weight: lighter;
+  margin-top: 1px;
+  font-size: 14px;
+}
+.coursedetail-sidebar .progress-row{
+
+    font-weight: lighter;
+  margin-top: 1px;
+  font-size: 14px;
+}
+
+.coursedetail-sidebar .progress-tiltle{
+    padding-top: 15px;
+}
+
+/* 🟢 Tiêu đề “Your Progress” */
+.progress-title {
+  font-size: 16px;          /* giảm size */
+  font-weight: 600;         /* semi-bold */
+  margin-bottom: 2px;
+}
+.coursedetail-accordion-trigger {
+  display: flex;
+  justify-content: space-between; /* ⭐ Đẩy khoảng cách hai đầu */
+  align-items: center;
+  width: 100%;
+}
+.coursedetail-accordion-trigger span:first-child {
+  flex: 1;              /* chia đều phần bên trái */
+  font-weight: 600;
+}
+
+.coursedetail-accordion-trigger span:last-child {
+  white-space: nowrap;  /* không bị xuống dòng */
+  font-size: 14px;
+  color: var(--course-muted-text);
+}
