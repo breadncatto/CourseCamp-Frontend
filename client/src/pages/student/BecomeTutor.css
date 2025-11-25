@@ -1,0 +1,114 @@
+.tutor-registration-card {
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Header Profile Section */
+.reg-profile-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.reg-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.reg-info h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.reg-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 14px;
+  color: #666;
+}
+
+.reg-contact span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Form Sections with Blue Left Border */
+.reg-section {
+  margin-bottom: 30px;
+}
+
+.reg-section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+  padding-left: 12px;
+  border-left: 4px solid #5a8dee; 
+  line-height: 1.2;
+}
+
+/* Input Styles override */
+.reg-input {
+  background-color: #f9f9f9; 
+  border: 1px solid #eee;
+  padding: 15px;
+  border-radius: 6px;
+  width: 100%;
+  font-family: inherit;
+  font-size: 14px;
+  color: #555;
+}
+
+.reg-input:focus {
+  background-color: #fff;
+  outline: none;
+  border-color: #5a8dee;
+}
+
+textarea.reg-input {
+  resize: none;
+  min-height: 100px;
+}
+
+/* Upload Button */
+.btn-upload {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #e3f2fd;
+  color: #5a8dee;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-upload:hover {
+  background-color: #bbdefb;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
