@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/CourseCampLogo.png" alt="CourseCamp Logo">
+        </div>
+        
+        <nav>
+            <a href="Tutor's Dashboard.html" title="Back to Dashboard" class="active">Dashboard</a>
+            <a href="Tutor's AddCourse.html" title="Add new course">Add course</a>
+            <a href="Tutor's MyCourse.html" title="Display all your created courses">My course</a>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <aside>
+            <button class="active">Dashboard</button>
+            <button>Add course</button>
+            <button>My course</button>
+        </aside>
+
+        <main>
+            <h1>Dashboard</h1>
+            <p>Course Overview</p>
+
+            <div class="stats-container">
+                <div class="stat-box">
+                    <span>Total Courses</span>
+                    <strong>2</strong>
+                </div>
+                <div class="stat-box">
+                    <span>Average Price (VND)</span>
+                    <strong>1.805.000</strong>
+                </div>
+                <div class="stat-box">
+                    <span>Level Distribution</span>
+                    <strong>B:1 * I:1 * A:0</strong>
+                    </div>
+            </div>
+
+            <h3>Recent Courses</h3>
+    
+            <div class="course-list">
+
+                <div class="course-card">
+                    <img src="images/Python course banner.png" alt="Python course banner">
+                    <div class="card-content">
+                        <div class="card-tags">
+                            <span class="tag-topic">PROGRAMMING</span>
+                            <span class="tag-level">Beginner</span>
+                        </div>
+                        <h3>Intro to Python</h3>
+                        <p>Get started with Python programming: syntax, data types, control flow, and mini projects.</p>
+                        <div class="card-footer">
+                            <span class="price">1.140.000 vnd</span>
+                            <button class="manage">Manage</button>
+                        </div>
+                    </div>
+                </div> 
+                <div class="course-card">
+                    <img src="images/React course banner.png" alt="React course banner">
+                    <div class="card-content">
+                        <div class="card-tags">
+                            <span class="tag-topic">FRONTEND</span>
+                            <span class="tag-level">Intermediate</span>
+                        </div>
+                        <h3>Web UI with react</h3>
+                        <p>Build modern frontends using React hooks, component patterns, and state management.</p>
+                        <div class="card-footer">
+                            <span class="price">3.290.000 vnd</span>
+                            <button class="manage">Manage</button>
+                        </div>
+                    </div>
+                </div> 
+            </div> 
+        </main>
+    </div>
+
+    <footer>
+        
+        <div class="footer-main">
+            
+            <div class="footer-col footer-about">
+                <img src="images/CourseCampLogo.png" alt="CourseCamp Logo">
+                <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+            </div>
+            
+            <div class="footer-col footer-links">
+                <a href="#">Home</a>
+                <a href="#">About Us</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            
+            <div class="footer-col footer-subscribe">
+                <h4>Subscribe to our newsletter</h4>
+                <p>The latest news, articles, and resources, sent to your inbox weekly.</p>
+                </div>
+            
+        </div>
+        
+        <div class="footer-bottom">
+            <p>Copyright 2025 © Course Camp. All Right Reserved.</p>
+        </div>
+        
+    </footer>
+</body>
+</html>
