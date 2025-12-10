@@ -1,0 +1,1 @@
+__Mục đích:__ Folder này chứa định tuyến các trang trong hệ thống, phân tách rạch ròi phạm vi các trang mà một user được đăng nhập dựa trên role mà user đó được gán

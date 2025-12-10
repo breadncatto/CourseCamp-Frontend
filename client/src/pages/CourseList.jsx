@@ -5,6 +5,7 @@ import CourseFilters from "../components/ui/CourseFilters.jsx";
 import CourseCard from "../components/ui/CourseCard.jsx";
 import { Link } from "react-router-dom";
 import Footer from "../components/ui/Footer.jsx";
+import Header from "../components/Header.jsx";
 
 function CourseList() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -45,6 +46,7 @@ function CourseList() {
 
   return (
     <div className="course-page">
+      {/* <Header /> */}
       {/* ---------- Header ---------- */}
       <header className="course-header">
         <div className="header-content">
@@ -81,7 +83,7 @@ function CourseList() {
       </header>
 
       {/* ---------- Main ---------- */}
-      <main className="main-content">
+      <main className="course-main-layout">
         <aside className="filters-section">
           <CourseFilters />
         </aside>

@@ -74,13 +74,14 @@
 }
 
 /* ====== Bố cục chính ====== */
-.main-content {
+.course-main-layout {
   display: flex;
   gap: 32px;
-  padding: 40px 80px;
+  padding: 40px 50px;
   margin: 0 auto;
-  width: px;          /* ✅ cho phép full chiều ngang */
+  width: 100%;          /* ✅ cho phép full chiều ngang */
   max-width: none;      /* ✅ bỏ giới hạn 1280px */
+  box-sizing: border-box;
 }
 
 .filters-section {

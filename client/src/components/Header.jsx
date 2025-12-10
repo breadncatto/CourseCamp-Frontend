@@ -66,7 +66,7 @@ const Header = () => {
               {!isAdmin && <div className="dropdown-item switch-role" onClick={() => handleNavigation('/admin/approval')} style={{color: '#6f42c1'}}>Switch to Admin</div>}
 
               <div className="dropdown-divider"></div>
-              <div className="dropdown-item logout" onClick={() => handleNavigation('/login')}>Logout</div>
+              <div className="dropdown-item logout" onClick={logout}>Logout</div>
             </div>
           )}
         </div>

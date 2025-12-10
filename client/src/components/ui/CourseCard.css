@@ -1,12 +1,15 @@
 /* Khung ngoài: kéo dài hết bề ngang vùng chứa */
 .courselist-card {
-  width: 1000px;           
+  width: 95%;           
+  min-width: 300px;
+  max-width: 1440px;
   box-sizing: border-box;    
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.05);
   padding: 24px 32px;        /* padding gọn */
   transition: 0.3s;
+  margin: 0 auto;
 }
 
 .courselist-card:hover {
@@ -15,6 +18,7 @@
 
 /* Hàng flex thực sự của card: text trái, ảnh phải */
 .card-content {
+  /* width: 100%; */
   display: flex;
   align-items: center;
   justify-content: space-between;
