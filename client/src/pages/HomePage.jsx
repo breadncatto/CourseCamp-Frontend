@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./HomePage.css";
 import logoCourseCamp from "../assets/logo-coursecamp.png";
 import { Search, BookOpen, GraduationCap, Users, Clock, CheckCircle, Award, Headphones, Play } from "lucide-react";
 import { Link } from "react-router-dom";
 import Footer from "../components/ui/Footer";
+import Header from "../components/ui/Header";
+import { getCourses } from "../api/courseService";
+import { formatCurrency } from "../helper/util.js";
 
 const HomePage = () => {
   const stats = [
@@ -20,7 +23,7 @@ const HomePage = () => {
     { icon: <Headphones />, text: "Giải đáp 24/7" },
   ];
 
-  const courses = [
+  const sample_courses = [
     {
       image: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=400&h=250&fit=crop",
       badge: "PROGRAMMING",
@@ -92,28 +95,26 @@ const HomePage = () => {
     },
   ];
 
+  const [courses, setCourses] = useState([]);
+  // fetch danh sách khóa học về
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await getCourses();
+        console.log(response.meta);
+        if(response && response.meta) {
+          setCourses(response.meta);
+        }
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    };
+
+    fetchCourses();
+  }, []);
   return (
     <div className="home-page">
-      {/* Header */}
-      <header className="navbar">
-        <div className="nav-left">
-          <img src={logoCourseCamp} alt="CourseCamp" className="logo" />
-        </div>
-        <div className="nav-right">
-          <Link to="/course-list">
-            <button className="btn primary">Khám phá khóa học</button>
-          </Link>
-          <Link to="/login">
-            <button className="btn secondary">Đăng nhập</button>
-          </Link>
-          <img
-            className="avatar"
-            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=80&h=80&fit=crop"
-            alt="user"
-          />
-        </div>
-      </header>
-
+      <Header />
       {/* Hero Section */}
       <section className="hero">
         <img src={logoCourseCamp} alt="CourseCamp" className="hero-logo" />
@@ -150,23 +151,23 @@ const HomePage = () => {
       <section className="courses">
         <h2>Khóa học nổi bật</h2>
         <div className="course-list">
-          {courses.map((c, i) => (
-            <div key={i} className="course-card">
-              <img src={c.image} alt={c.title} />
+          {courses.slice(0, 4).map((c) => (
+            <div key={c.course_id} className="course-card">
+              <img src={c.image_url || "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?w=400&h=250&fit=crop"} alt={c.title} />
               <div className="course-info">
-                <span className="badge">{c.badge}</span>
+                <span className="badge">{c.category_name}</span>
                 <span className="level">{c.level}</span>
                 <h3>{c.title}</h3>
                 <p>{c.description}</p>
                 <div className="course-footer">
-                  <span className="price">{c.price}</span>
+                  <span className="price">{formatCurrency(c.price)}</span>
                   <Link to="/course/:id"><button className="btn small">Details</button></Link>
                 </div>
               </div>
             </div>
           ))}
         </div>
-        <Link to="/course-list"><button className="all-btn">Tất cả khóa học</button></Link>
+        <Link to="/course-list" className="all-btn">Tất cả khóa học</Link>
       </section>
 
       {/* Testimonials */}

@@ -25,10 +25,9 @@ function AppRoutes() {
         <Route path="/course/:id" element={<CourseDetail/>}/>
         <Route path="/course-list" element={<CourseList/>}/>
         <Route path="/course/:id/lesson/:lessonId" element={<LessonDetail />} />
-        {/* <Route path="/" element={<Navigate to="/tutor/dashboard" replace />} /> */}
         
         {/* TUTOR ROUTES */}
-        <Route element={<ProtectedRoute allowedRoles={["tutor"]} />}>
+        <Route element={<ProtectedRoute allowedRoles={["instructor"]} />}>
             <Route path="/tutor/dashboard" element={<TutorDashboard />} />
             <Route path="/tutor/add-course" element={<TutorAddCourse />} />
             <Route path="/tutor/my-course" element={<TutorMyCourse />} />

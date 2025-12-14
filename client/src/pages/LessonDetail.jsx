@@ -73,7 +73,7 @@ const LessonDetail = () => {
       {/* 🔙 Header */}
       <header className="lesson-header sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
-          <Link to={`/course/${courseId}`}>
+          <Link to={`/student/courses`}>
             <Button variant="ghost" size="sm" className="py-3">
               <ChevronLeft className="mr-2 h-4 w-4" />
               Quay lại khóa học

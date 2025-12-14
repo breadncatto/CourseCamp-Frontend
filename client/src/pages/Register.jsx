@@ -4,13 +4,77 @@
   - Thêm state để kiểm tra lại password.
   - Đăng ký thành công sẽ tạo token, chuyển hướng sang trang homepage
 */
-import React from "react";
+import React, { useState } from "react";
 import "./Register.css";
 import logo from "../assets/logo-coursecamp.png";
 import googleLogo from "../assets/logo-google.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const { register } = useAuth(); 
+  // State form fields
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+
+  const [errors, setErrors] = useState({});
+
+  // Xử lý thay đổi input
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.email) {
+      newErrors.email = 'Email là bắt buộc';
+    }
+
+    if (!formData.password) {
+      newErrors.password = 'Mật khẩu là bắt buộc';
+    } else if (formData.password.length < 8) {
+      newErrors.password = 'Mật khẩu phải từ 8 ký tự trở lên';
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = 'Mật khẩu xác nhận không khớp';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    setErrors({});
+
+    const payload = {
+      email: formData.email,
+      password: formData.password,
+      confirmPassword: formData.confirmPassword,
+      role: formData.role || 'student'
+    };
+
+    const result = await register(payload);
+
+    if (result.success) {
+      alert("Đăng ký thành công! Vui lòng đăng nhập.");
+      navigate('/login');
+    } else {
+      setErrors({ api: result.message });
+    }
+  };
+
   return (
     <div className="register-page">
       <div className="register-box">
@@ -23,11 +87,10 @@ const Register = () => {
         <h2 className="register-title">Create an account</h2>
 
         {/* Form */}
-        <form className="register-form">
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Password" required />
-          <input type="password" placeholder="Confirm your password" required />
-          <input type="tel" placeholder="Phone Number" required />
+        <form className="register-form" onSubmit={handleSubmit}>
+          <input type="email" placeholder="Email" value={formData.email} onChange={handleChange} name="email" required />
+          <input type="password" placeholder="Password" value={formData.password} onChange={handleChange} name="password" required />
+          <input type="password" placeholder="Confirm your password" value={formData.confirmPassword} onChange={handleChange} name="confirmPassword" required />
           <button type="submit" className="btn-email">
             Create account
           </button>
@@ -47,7 +110,7 @@ const Register = () => {
         {/* Links */}
         <div className="register-links">
           <p>
-            Already have an account? <Link to="/login"><a>Log in</a></Link>
+            Already have an account? <Link to="/login">Log in</Link>
           </p>
 
           <p className="terms">

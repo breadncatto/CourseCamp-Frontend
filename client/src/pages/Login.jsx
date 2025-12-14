@@ -4,13 +4,43 @@
   - Sau này thêm nghiệp vụ xử lý đăng nhập, lưu trữ token.
   - Thêm đăng nhập OAuth vào dự án hệ thống.
  */
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import "./Login.css";
 import logo from "../assets/logo-coursecamp.png";
 import googleLogo from "../assets/logo-google.png"; // ✅ thêm dòng này
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { login } = useAuth(); 
+  const navigate = useNavigate();
+
+  // --- HÀM XỬ LÝ ĐĂNG NHẬP ---
+  const handleLogin = async (e) => {
+    e.preventDefault(); // Ngăn form reload lại trang
+
+    try {
+      const response = await login(email, password);
+      if (response.status === 200) {
+        
+        const token = response.data.meta.token;
+        // console.log(response.data.meta);
+        // Lưu token vào localStorage
+        localStorage.setItem("token", token);
+        
+        alert("Đăng nhập thành công!");
+        
+        navigate("/"); 
+      }
+    } catch (error) {
+      console.error("Lỗi đăng nhập:", error);
+      alert(error.response?.data?.message || "Đăng nhập thất bại. Vui lòng thử lại.");
+    }
+  };
+
   return (
     <div className="login-page">
       <div className="login-box">
@@ -23,9 +53,19 @@ const Login = () => {
         <h2 className="login-title">Log in to CourseCamp</h2>
 
         {/* Form */}
-        <form className="login-form">
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Password" required />
+        <form className="login-form" onSubmit={handleLogin}>
+          <input 
+            type="email" 
+            placeholder="Email" 
+            required 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}/>
+          <input
+            type="password"
+            placeholder="Password" 
+            required 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}/>
           <button type="submit" className="btn-email">
             Log in with your Email
           </button>
@@ -48,7 +88,7 @@ const Login = () => {
         {/* Links */}
         <div className="login-links">
           <p>
-            Don't have an account? <Link to="/register"><a href="Register.jsx">Register</a></Link>
+            Don't have an account? <Link to="/register">Register</Link>
           </p>
           <a href="#">Forgot your password?</a>
         </div>
