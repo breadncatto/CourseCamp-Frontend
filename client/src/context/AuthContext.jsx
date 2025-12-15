@@ -6,7 +6,9 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    return !!localStorage.getItem("token");
+  });
   const [isLoading, setIsLoading] = useState(true);
 
   const API_URL = "http://localhost:3000/api/auth";
@@ -54,9 +56,9 @@ export const AuthProvider = ({ children }) => {
       setIsLoggedIn(true);
       return decodedUser;
     } catch (error) {
-      const message = err.response?.data?.message || "Đăng nhập thất bại!";
+      const message = error.response?.data?.message || "Đăng nhập thất bại!";
       alert(message);
-      console.error(err);
+      console.error(error);
       return false;
     }
   };
@@ -82,7 +84,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
   return (
-    <AuthContext.Provider value={{ user, isLoggedIn, isLoading, login, logout, register }}>
+    <AuthContext.Provider value={{ user, isLoggedIn, isLoading, setIsLoggedIn, login, logout, register }}>
       {children}
     </AuthContext.Provider>
   );

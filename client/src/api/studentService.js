@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_URL = "http://localhost:3000/api";
 export const getStudentProfile = async () => {
-    const token = localStorage.getItem('token');
+  const token = localStorage.getItem('token');
   
   // Kiểm tra nếu chưa có token thì báo lỗi hoặc xử lý redirect (tùy logic)
   if (!token) {
@@ -12,6 +12,38 @@ export const getStudentProfile = async () => {
   const response = await axios.get(`${API_URL}/student/profile`, {
     headers: {
       Authorization: `Bearer ${token}` 
+    }
+  });
+
+  return response.data;
+}
+
+export const updateStudentProfile = async (data) => {
+  const token = localStorage.getItem('token');
+
+  if(!token) {
+    throw new Error("No access token found");
+  }
+
+  const response = await axios.put(`${API_URL}/student/profile`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+
+  return response.data;
+}
+
+export const getMyCourses = async () => {
+  const token = localStorage.getItem('token');
+
+  if(!token) {
+    throw new Error("No access token found");
+  }
+
+  const response = await axios.get(`${API_URL}/student/my-courses`, {
+    headers: {
+      Authorization: `Bearer ${token}`
     }
   });
 

@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import CourseList from "../pages/CourseList";
-import HomePage from "../pages/HomePage";
-import CourseDetail from "../pages/CourseDetail";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import LessonDetail from "../pages/LessonDetail";
+import CourseList from "../pages/public/CourseList";
+import HomePage from "../pages/public/HomePage";
+import CourseDetail from "../pages/public/CourseDetail";
+import Login from "../pages/public/Login";
+import Register from "../pages/public/Register";
+import LessonDetail from "../pages/public/LessonDetail";
 import TutorDashboard from "../pages/tutor/Dashboard";
 import TutorAddCourse from "../pages/tutor/AddCourse";
 import TutorMyCourse from "../pages/tutor/MyCourse";
@@ -30,13 +30,13 @@ function AppRoutes() {
         <Route element={<ProtectedRoute allowedRoles={["instructor"]} />}>
             <Route path="/tutor/dashboard" element={<TutorDashboard />} />
             <Route path="/tutor/add-course" element={<TutorAddCourse />} />
-            <Route path="/tutor/my-course" element={<TutorMyCourse />} />
+            <Route path="/tutor/my-courses" element={<TutorMyCourse />} />
         </Route>
         
         {/* STUDENT ROUTES */}
         <Route element={<ProtectedRoute allowedRoles={["student"]} />}>
             <Route path="/student/profile" element={<StudentProfile />} />
-            <Route path="/student/courses" element={<StudentMyCourses />} />
+            <Route path="/student/my-courses" element={<StudentMyCourses />} />
             <Route path="/student/become-tutor" element={<BecomeTutor />} />
         </Route>
 

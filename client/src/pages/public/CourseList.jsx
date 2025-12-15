@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import "./CourseList.css";
-import logoCourseCamp from "../assets/logo-coursecamp.png";
-import CourseFilters from "../components/ui/CourseFilters.jsx";
-import CourseCard from "../components/ui/CourseCard.jsx";
+import logoCourseCamp from "../../assets/logo-coursecamp.png";
+import CourseFilters from "../../components/ui/CourseFilters.jsx";
+import CourseCard from "../../components/ui/CourseCard.jsx";
 import { Link } from "react-router-dom";
-import Footer from "../components/ui/Footer.jsx";
-import Header from "../components/ui/Header.jsx";
-import { getCourses } from "../api/courseService.js";
+import Footer from "../../components/ui/Footer.jsx";
+import Header from "../../components/ui/Header.jsx";
+import { getCourses } from "../../api/courseService.js";
 
 function CourseList() {
   const [searchQuery, setSearchQuery] = useState("");

@@ -10,12 +10,12 @@ const USER_AVATAR = "https://images.unsplash.com/photo-1535713875002-d1d0cf377fd
 function Header() {
     // const { isLoggedIn } = useAuth(); 
     // console.log(isLoggedIn);
-    const { logout } = useAuth(); 
+    const { user, logout, isLoggedIn } = useAuth(); 
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
   
   // --- STATE GIẢ LẬP (Sau này bạn sẽ thay bằng Context hoặc Redux) ---
-  const [isLoggedIn, setIsLoggedIn] = useState(true); // Thử đổi thành true để xem giao diện đã login
+  // const [isLoggedIn, setIsLoggedIn] = useState(false); // Thử đổi thành true để xem giao diện đã login
   const [showDropdown, setShowDropdown] = useState(false);
 
   // Xử lý click ra ngoài để đóng dropdown
@@ -30,15 +30,9 @@ function Header() {
   }, []);
 
   const handleLogout = () => {
-    setIsLoggedIn(false);
     setShowDropdown(false);
     logout();
     navigate("/"); // Quay về trang chủ
-  };
-
-  const handleLogin = () => {
-    setIsLoggedIn(true); // Giả lập login thành công
-    setShowDropdown(false);
   };
 
   return (
@@ -55,7 +49,20 @@ function Header() {
           <Link to="/" className="nav-link">Home</Link>
           <Link to="/course-list" className="nav-link">Courses</Link>
           {isLoggedIn && (
-            <Link to="/my-courses" className="nav-link">My Courses</Link>
+            user.role === "student" ? (
+              <>
+                <Link to="/student/my-courses" className="nav-link">My Courses</Link>
+                {/* <Link to="/student/become-tutor" className="nav-link">Become a Tutor</Link> */}
+              </>
+            ) : user.role === "instructor" ? (
+              <>
+                <Link to="/tutor/dashboard" className="nav-link">Dashboard</Link>
+                <Link to="/tutor/add-course" className="nav-link">Add Course</Link>
+                <Link to="/tutor/my-courses" className="nav-link">My Courses</Link>
+              </>
+            ) : (
+              <Link to="/admin/approval" className="nav-link">Course Approval</Link>
+            )
           )}
         </nav>
 
@@ -79,15 +86,24 @@ function Header() {
                 // --- Menu cho người dùng ĐÃ ĐĂNG NHẬP ---
                 <>
                   <div className="dropdown-header">
-                    <span className="user-name">Nguyen Van A</span>
-                    <span className="user-email">student@coursecamp.com</span>
+                    <span className="user-name">{user.name ?? "Unknown User"}</span>
+                    <span className="user-role">{user.role}</span>
+                    <span className="user-email">{user.email}</span>
                   </div>
-                  <button className="dropdown-item" onClick={() => navigate("/profile")}>
+                  <button className="dropdown-item" onClick={() => {
+                    if(user.role === "student") {
+                      navigate("/student/profile")
+                    } else if(user.role === "instructor") {
+                      navigate("/tutor/dashboard")
+                    } else {
+                      navigate("/")
+                    }
+                  }}>
                     Profile
                   </button>
-                  <button className="dropdown-item" onClick={() => navigate("/settings")}>
+                  {/* <button className="dropdown-item" onClick={() => navigate("/settings")}>
                     Settings
-                  </button>
+                  </button> */}
                   <button className="dropdown-item logout" onClick={handleLogout}>
                     Logout
                   </button>
@@ -99,7 +115,7 @@ function Header() {
                     <span className="user-name">Welcome, Guest!</span>
                     <span className="user-email">Please login to continue</span>
                   </div>
-                  <button className="dropdown-item" onClick={handleLogin}>
+                  <button className="dropdown-item" onClick={() => navigate("/login")}>
                     Login
                   </button>
                   <button className="dropdown-item" onClick={() => navigate("/register")}>

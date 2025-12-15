@@ -7,10 +7,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./Login.css";
-import logo from "../assets/logo-coursecamp.png";
-import googleLogo from "../assets/logo-google.png"; // ✅ thêm dòng này
+import logo from "../../assets/logo-coursecamp.png";
+import googleLogo from "../../assets/logo-google.png"; // ✅ thêm dòng này
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -23,21 +23,15 @@ const Login = () => {
     e.preventDefault(); // Ngăn form reload lại trang
 
     try {
-      const response = await login(email, password);
-      if (response.status === 200) {
-        
-        const token = response.data.meta.token;
-        // console.log(response.data.meta);
-        // Lưu token vào localStorage
-        localStorage.setItem("token", token);
-        
+      const response = await login(email, password); // Nếu thành công thì token đã được useAuth lưu rồi
+
+      if (response) {
         alert("Đăng nhập thành công!");
-        
         navigate("/"); 
       }
     } catch (error) {
       console.error("Lỗi đăng nhập:", error);
-      alert(error.response?.data?.message || "Đăng nhập thất bại. Vui lòng thử lại.");
+      alert(error|| "Đăng nhập thất bại. Vui lòng thử lại.");
     }
   };
 

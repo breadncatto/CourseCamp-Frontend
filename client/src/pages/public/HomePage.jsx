@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./HomePage.css";
-import logoCourseCamp from "../assets/logo-coursecamp.png";
+import logoCourseCamp from "../../assets/logo-coursecamp.png";
 import { Search, BookOpen, GraduationCap, Users, Clock, CheckCircle, Award, Headphones, Play } from "lucide-react";
 import { Link } from "react-router-dom";
-import Footer from "../components/ui/Footer";
-import Header from "../components/ui/Header";
-import { getCourses } from "../api/courseService";
-import { formatCurrency } from "../helper/util.js";
+import Footer from "../../components/ui/Footer.jsx";
+import Header from "../../components/ui/Header.jsx";
+import { getCourses } from "../../api/courseService.js";
+import { formatCurrency } from "../../helper/util.js";
 
 const HomePage = () => {
   const stats = [
@@ -152,7 +152,7 @@ const HomePage = () => {
         <h2>Khóa học nổi bật</h2>
         <div className="course-list">
           {courses.slice(0, 4).map((c) => (
-            <div key={c.course_id} className="course-card">
+            <div key={c.course_id} className="home-course-card">
               <img src={c.image_url || "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?w=400&h=250&fit=crop"} alt={c.title} />
               <div className="course-info">
                 <span className="badge">{c.category_name}</span>

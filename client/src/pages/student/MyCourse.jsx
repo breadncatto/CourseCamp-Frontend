@@ -1,10 +1,13 @@
 import React from 'react';
 import Sidebar from '../../components/Sidebar';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+import Header from '../../components/ui/Header';
+import Footer from '../../components/ui/Footer';
 import CourseCard from '../../components/CourseCard';
 import pythonBanner from '../../assets/python-banner.png';
 import reactBanner from '../../assets/react-banner.png';
+
+// Import file CSS vừa tạo
+import './MyCourse.css'; 
 
 const studentCourses = [
   {
@@ -30,19 +33,22 @@ const studentCourses = [
 const StudentMyCourses = () => {
   return (
     <div className="dashboard-layout">
+      <Header /> 
       <div className="body-container">
         <Sidebar role="student" activePage="courses" />
         <main className="main-content">
-          <Header /> 
           <div className="content-body">
             <div className="header-section">
               <h1>My Courses</h1>
               <p className="subtitle">Courses you are enrolled in</p>
             </div>
-            <div className="courses-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '30px' }}>
+            
+            {/* Sử dụng class courses-grid thay vì style inline để layout đẹp và responsive */}
+            <div className="courses-grid">
               {studentCourses.map((course) => (
                 <CourseCard 
                   key={course.id}
+                  id={course.id} // Truyền ID để dùng cho việc điều hướng
                   title={course.title}
                   level={course.level}
                   image={course.image}
@@ -52,6 +58,7 @@ const StudentMyCourses = () => {
                 />
               ))}
             </div>
+
           </div>
         </main>
       </div>

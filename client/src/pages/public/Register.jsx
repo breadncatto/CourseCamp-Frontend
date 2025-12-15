@@ -6,10 +6,10 @@
 */
 import React, { useState } from "react";
 import "./Register.css";
-import logo from "../assets/logo-coursecamp.png";
-import googleLogo from "../assets/logo-google.png";
+import logo from "../../assets/logo-coursecamp.png";
+import googleLogo from "../../assets/logo-google.png";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
 const Register = () => {
   const navigate = useNavigate();

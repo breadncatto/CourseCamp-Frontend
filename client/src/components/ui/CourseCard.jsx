@@ -59,7 +59,7 @@ function CourseCard({ course }) {
         <span className="course-price">{formatCurrency(course.price)}</span>
         <button 
           className="btn-detail" 
-          onClick={() => navigate(`/course/${course.course_id || course._id}`)}
+          onClick={() => navigate(`/course/${course.course_id}`)}
         >
           View Detail
         </button>

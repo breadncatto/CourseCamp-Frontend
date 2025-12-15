@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
-import { Button } from "../components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
+import { Button } from "../../components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
 import {
   Dialog,
   DialogTrigger,
@@ -11,11 +11,11 @@ import {
   DialogTitle,
   DialogDescription,
   DialogClose
-} from "../components/ui/dialog";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
+} from "../../components/ui/dialog";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../components/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../components/ui/accordion";
 import { ChevronLeft, FileText, Video, CheckSquare, Download, Clock } from "lucide-react";
-import Footer from "../components/ui/Footer";
+import Footer from "../../components/ui/Footer";
 import "./LessonDetail.css";
 
 const LessonDetail = () => {

@@ -1,0 +1,71 @@
+/* --- Grid Layout cho danh sách khóa học --- */
+.dashboard-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f7fa; /* Thêm màu nền nhẹ cho tổng thể */
+}
+
+.courses-grid {
+  display: grid;
+  /* Tự động chia cột: mỗi cột tối thiểu 320px, tối đa 1fr */
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  padding-bottom: 40px;
+}
+
+/* --- Fix lỗi xung đột Tag (như trong ảnh bạn gửi) --- */
+/* Dùng .course-card .course-tag để tăng độ ưu tiên CSS */
+.course-card .course-tag {
+  background: #fff0e6; /* Màu nền cam nhạt */
+  color: #ff5b5c;      /* Màu chữ cam đỏ */
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  display: inline-block;
+  letter-spacing: 0.5px;
+}
+
+/* Style cho các nút trong Card */
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.btn-learn {
+  flex: 1;
+  max-width: 200px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background-color: #5b84c1;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-learn:hover {
+  background-color: #4a75b5;
+}
+
+.btn-rate {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: white;
+  color: #555;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-rate:hover {
+  border-color: #5b84c1;
+  color: #5b84c1;
+}

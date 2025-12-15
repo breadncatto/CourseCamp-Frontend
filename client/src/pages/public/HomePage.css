@@ -215,7 +215,7 @@
   margin-bottom: 20px;
 }
 
-.course-card {
+.home-course-card {
   background: white;
   border-radius: 12px;
   overflow: hidden;
@@ -224,11 +224,11 @@
   transition: 0.3s;
 }
 
-.course-card:hover {
+.home-course-card:hover {
   transform: translateY(-6px);
 }
 
-.course-card img {
+.home-course-card img {
   width: 100%;
   height: 160px;
   object-fit: cover;

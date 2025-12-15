@@ -1,4 +1,5 @@
 .profile-container {
+  max-width: 1440px;;
   display: flex;
   gap: 30px;
 }
@@ -54,8 +55,43 @@
   font-size: 18px;
   font-weight: 600;
   color: #333;
+  /* Thêm flex để căn chỉnh nút Edit nằm ngang hàng với tiêu đề nếu cần */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Style cho nút Edit nhỏ nằm cạnh tiêu đề */
+.btn-edit-toggle {
+  background: none;
+  border: 1px solid #007bff;
+  color: #007bff;
+  padding: 5px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.btn-edit-toggle:hover {
+  background: #007bff;
+  color: white;
+}
+
+.btn-edit-toggle.active {
+  background: #6c757d;
+  border-color: #6c757d;
+  color: white;
 }
 
 .update-btn-container {
   margin-top: 20px;
+}
+
+/* --- MỚI: Style cho input khi không được edit (bị mờ) --- */
+.form-control:disabled {
+  background-color: #f9f9f9; /* Màu nền xám nhẹ */
+  color: #999; /* Màu chữ mờ đi */
+  cursor: not-allowed; /* Con trỏ chuột báo hiệu không click được */
+  border: 1px solid #eee;
 }
