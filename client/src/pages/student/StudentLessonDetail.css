@@ -1,0 +1,252 @@
+/* --- LAYOUT TỔNG --- */
+.learning-layout {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  background-color: #f8fafc;
+  overflow: hidden; /* Chặn cuộn body, chỉ cuộn từng phần */
+  font-family: "Montserrat", sans-serif;
+}
+
+/* --- SIDEBAR (TRÁI) --- */
+.course-sidebar {
+  width: 320px;
+  background: #ffffff;
+  border-right: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0; /* Không bị co lại */
+  z-index: 10;
+}
+
+.sidebar-header {
+  padding: 20px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.course-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.progress-text {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.sidebar-content {
+  flex: 1;
+  overflow-y: auto; /* Cuộn dọc cho danh sách bài học */
+}
+
+/* Module Group */
+.module-group {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.module-header {
+  padding: 16px 20px;
+  background: #f8fafc;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #334155;
+  transition: background 0.2s;
+}
+
+.module-header:hover {
+  background: #f1f5f9;
+}
+
+/* Lesson Item in Sidebar */
+.module-lessons {
+  background: #fff;
+}
+
+.sidebar-lesson-item {
+  display: flex;
+  align-items: flex-start; /* Để icon căn trên nếu tên dài */
+  gap: 12px;
+  padding: 12px 20px 12px 24px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+}
+
+.sidebar-lesson-item:hover {
+  background-color: #f8fafc;
+}
+
+/* Active State */
+.sidebar-lesson-item.active {
+  background-color: #eff6ff;
+  border-left-color: #3b82f6; /* Xanh dương */
+}
+
+.sidebar-lesson-item.active .lesson-name {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.lesson-check {
+  margin-top: 2px;
+}
+
+.icon-completed {
+  color: #22c55e; /* Xanh lá */
+}
+
+.icon-pending {
+  color: #cbd5e1; /* Xám nhạt */
+}
+
+.lesson-info-side {
+  display: flex;
+  flex-direction: column;
+}
+
+.lesson-name {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.4;
+}
+
+.lesson-duration {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+/* --- MAIN CONTENT (PHẢI) --- */
+.learning-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* Cuộn nội dung bên phải */
+  position: relative;
+}
+
+.learning-header {
+  height: 60px;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.header-breadcrumbs {
+  font-size: 14px;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lesson-container {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 32px 24px;
+  flex: 1;
+}
+
+/* Video Area */
+.video-area {
+  margin-bottom: 24px;
+}
+
+.video-placeholder-large {
+  width: 100%;
+  aspect-ratio: 16/9; /* Tỉ lệ chuẩn video */
+  background: #0f172a;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Lesson Control Bar (Title + Button) */
+.lesson-control-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  gap: 20px;
+}
+
+.current-lesson-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.mark-complete-btn {
+  background-color: #fff !important;
+  color: #334155 !important;
+  border: 1px solid #cbd5e1 !important;
+  min-width: 180px;
+}
+
+.mark-complete-btn:hover {
+  background-color: #f8fafc !important;
+}
+
+.mark-complete-btn.completed {
+  background-color: #dcfce7 !important; /* Xanh lá nhạt */
+  color: #166534 !important;
+  border-color: #86efac !important;
+}
+
+/* Override Tabs Style (Clean hơn) */
+.lesson-tabs {
+  background: transparent !important;
+  border-bottom: 2px solid #e2e8f0;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  justify-content: flex-start !important;
+  gap: 32px;
+}
+
+.lesson-tabs button {
+  background: transparent !important;
+  border-radius: 0 !important;
+  border-bottom: 2px solid transparent;
+  padding: 10px 0 !important;
+  color: #64748b;
+  font-size: 15px;
+}
+
+.lesson-tabs button[data-state="active"] {
+  color: #2563eb !important;
+  border-bottom-color: #2563eb !important;
+  box-shadow: none !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .learning-layout {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .course-sidebar {
+    width: 100%;
+    height: auto;
+    max-height: 300px; /* Thu gọn trên mobile */
+    overflow-y: auto;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .learning-main {
+    overflow: visible;
+  }
+}

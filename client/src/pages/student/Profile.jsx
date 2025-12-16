@@ -6,11 +6,13 @@ import './Profile.css';
 import localAvatar from '../../assets/avatar.png';
 import { getStudentProfile, updateStudentProfile } from '../../api/studentService';
 import { formatDate, formatInputDate, stringToSkills, skillsToString, toDateInputValue } from '../../helper/util';
+import { useAuth } from '../../context/AuthContext';
 
 const StudentProfile = () => {
 
   // Thêm api cập nhật profile về backend
   // Thêm api lấy profile về từ backend.
+  const { user, setUser } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [profile, setProfile] = useState({
     fullName: "",
@@ -86,6 +88,8 @@ const StudentProfile = () => {
 
         setProfile(tempProfile);
         // Phải chỉnh temmpProfile về để hiển thị cho đúng, skills, interests về string
+        user.name = data.full_name;
+        setUser(user);
       }
       setIsEditing(false);
       alert("Hồ sơ đã được cập nhật thành công") 

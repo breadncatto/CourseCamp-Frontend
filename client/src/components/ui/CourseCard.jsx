@@ -45,7 +45,7 @@ function CourseCard({ course }) {
         <h3 className="course-title" title={course.title}>{course.title}</h3>
         
         <p className="course-instructor">
-          <i style={{fontSize: '12px'}}>👨‍🏫</i> {instructorName}
+          Giảng viên: {instructorName}
         </p>
         
         <div className="course-tags">

@@ -10,6 +10,13 @@ import { Button } from "../../components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
 import { Card } from "../../components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../components/ui/accordion";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+} from "../../components/ui/dialog";
 import Footer from "../../components/ui/Footer";
 import Header from "../../components/ui/Header";
 
@@ -18,6 +25,7 @@ import { getCourseById } from "../../api/courseService";
 import { formatCurrency } from "../../helper/util";
 import { useAuth } from "../../context/AuthContext";
 import { getMyCourses } from "../../api/studentService";
+import { createPayment } from "../../api/paymentService";
 
 const CourseDetail = () => {
   const { id } = useParams();
@@ -28,6 +36,7 @@ const CourseDetail = () => {
   // State lưu dữ liệu từ API
   const [apiData, setApiData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [openPayment, setOpenPayment] = useState(false);
 
   useEffect(() => {
     const fetchCourse = async () => {
@@ -121,11 +130,33 @@ const CourseDetail = () => {
   const handleEnrollClick = () => {
     if(!isEnrolled) {
       // Thêm api fetch về BE để tạo enrollment cho khóa học
-      setIsEnrolled(true);
+      // Đây là luồng khi chưa đăng ký vào khóa học
+      setOpenPayment(true);
+
     } else {
+      // navigate("/course/" + id + "/lesson/" + id);
+      // Luồng khi khóa học đã được đăng ký:
+      setIsEnrolled(true);
       navigate("/course/" + id + "/lesson/" + id);
     }
   };
+
+  const handlePaymentCreate = async () => {
+    try {
+      const payload = {
+        courseId: apiData.course_id,
+        price: apiData.price,
+      }
+      const url = await createPayment(payload);
+      console.log("url" + url);
+      if(url) {
+        const paymentUrl = url;
+        window.location.href = paymentUrl;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
   return (
     <div className="coursedetail-page">
       <Header />
@@ -413,7 +444,33 @@ const CourseDetail = () => {
       </div>
 
       <Footer />
+      <Dialog open={openPayment === true} onOpenChange={setOpenPayment}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Thanh toán khóa học: <div className="bold">{course.price}</div></DialogTitle>
+          </DialogHeader>
+          <DialogFooter>
+            <Button
+              onClick={() => {
+                setOpenPayment(false);
+              }}
+            >
+              Không
+            </Button>
+            <Button
+              onClick={() => {
+                alert("Chuyển hướng sang cổng thanh toán")
+                handlePaymentCreate()
+                setOpenPayment(false);
+              }}
+            >
+              Có
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
+
   );
 };
 

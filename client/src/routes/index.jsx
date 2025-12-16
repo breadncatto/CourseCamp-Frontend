@@ -5,7 +5,8 @@ import HomePage from "../pages/public/HomePage";
 import CourseDetail from "../pages/public/CourseDetail";
 import Login from "../pages/public/Login";
 import Register from "../pages/public/Register";
-import LessonDetail from "../pages/public/LessonDetail";
+// import LessonDetail from "../pages/public/LessonDetail";
+import LessonDetail from "../pages/student/StudentLessonDetail";
 import TutorDashboard from "../pages/tutor/Dashboard";
 import TutorAddCourse from "../pages/tutor/AddCourse";
 import TutorMyCourse from "../pages/tutor/MyCourse";
@@ -24,7 +25,7 @@ function AppRoutes() {
         <Route path="/register" element={<Register/>}/>
         <Route path="/course/:id" element={<CourseDetail/>}/>
         <Route path="/course-list" element={<CourseList/>}/>
-        <Route path="/course/:id/lesson/:lessonId" element={<LessonDetail />} />
+        <Route path="/course/:courseId/lesson/:lessonId" element={<LessonDetail />} />
         
         {/* TUTOR ROUTES */}
         <Route element={<ProtectedRoute allowedRoles={["instructor"]} />}>

@@ -6,17 +6,16 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    return !!localStorage.getItem("token");
-  });
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
 
   const API_URL = "http://localhost:3000/api/auth";
   // Load lại mỗi khi load trang(F5):
   useEffect(() => {
     const checkUserStatus = () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = sessionStorage.getItem("token");
         if(token) {
           const decodedUser = jwtDecode(token);
 
@@ -48,7 +47,7 @@ export const AuthProvider = ({ children }) => {
           "Lỗi không có token được trả về!"
         )
       }
-      localStorage.setItem("token", token);
+      sessionStorage.setItem("token", token);
 
       const decodedUser = jwtDecode(token);
       console.log("Token được giải mã: ", decodedUser);
@@ -65,7 +64,7 @@ export const AuthProvider = ({ children }) => {
 
   //Logout là xóa sạch dấu vết user ở trang web.
   const logout = () => {
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
     setUser(null);
     setIsLoggedIn(false);
   };
@@ -83,8 +82,12 @@ export const AuthProvider = ({ children }) => {
       return { success: false, message };
     }
   };
+
+  if(isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
-    <AuthContext.Provider value={{ user, isLoggedIn, isLoading, setIsLoggedIn, login, logout, register }}>
+    <AuthContext.Provider value={{ user, isLoggedIn, isLoading, setUser, setIsLoggedIn, login, logout, register }}>
       {children}
     </AuthContext.Provider>
   );
