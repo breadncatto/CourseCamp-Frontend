@@ -2,20 +2,20 @@ import React, { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import hook điều hướng
 import { useAuth } from '../context/AuthContext';
 import ReviewContent from './ReviewContent';
+import { reviewCourse } from '../api/studentService';
 
 // Component đánh giá sao
 
-const CourseCard = ({ id, title, level, price, image, description, tag, progress }) => {
+const CourseCard = ({ id, title, level, price, image, description, tag, progress, first_lesson_id }) => {
   const navigate = useNavigate(); // Hook chuyển trang
   const isStudentCard = progress !== undefined;
-  
   // State quản lý chế độ Review (Modal ngay trong card)
   const [isReviewing, setIsReviewing] = useState(false);
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [reviewText, setReviewText] = useState('');
 
-  const { user } = useAuth();
+  // const { user } = useAuth();
   const handleCloseReview = () => {
     setIsReviewing(false);
     setHoverRating(0);
@@ -23,27 +23,40 @@ const CourseCard = ({ id, title, level, price, image, description, tag, progress
     setReviewText('');
   };
 
-  const handleSubmitReview = (rating, reviewText) => {
+  const handleSubmitReview = async (e) => {
+    e.preventDefault();
+
+    const payload = {
+      courseId: id,
+      rating: rating,
+      comment: reviewText,
+    }
+    console.log(payload);
+
+
     try {
       // Gửi đánh giá lên với user_id tương ứng và course_id tương ứng
-      alert(`Người dùng ${user.user_id} đánh giá khóa học ${id} thành công`);
+      // alert(`Người dùng ${user.user_id} đánh giá khóa học ${id} thành công`);
+      const response = await reviewCourse(payload);
+      console.log(response);
+      alert(`Đánh giá khóa học thành công`);
       setIsReviewing(false);
       setHoverRating(0);
       setRating(0);
       setReviewText('');
     } catch (error) {
       console.error("Lỗi khi gửi đánh giá:", error);
-      alert("Đánh giá thất bại. Vui lòng thử lại.");
-      // setIsReviewing(false);
-      // setHoverRating(0);
-      // setRating(0);
-      // setReviewText('');
+      if(error.status == 400) {
+        alert(`Bạn đã đánh giá khóa học này trước đó.`);
+      } else {
+        alert("Đánh giá thất bại. Vui lòng thử lại.");
+      }
     }
   }
   // Xử lý chuyển hướng sang trang bài học
   const handleStartLearning = () => {
     // Điều hướng đến đường dẫn chi tiết khóa học, ví dụ: /learn/1
-    alert("Chuyển hướng sang trang học hành")
+    navigate(`/course/${id}/lesson/${first_lesson_id}`);
   };
 
   // --- CONTENT CHÍNH CỦA CARD ---

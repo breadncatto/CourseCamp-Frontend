@@ -1,9 +1,10 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { 
   ArrowLeft, Lock, Clock, PlayCircle, Star, User, 
   CheckCircle2, Globe, BarChart, BookOpen, BadgeCheck
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 // UI components
 import { Button } from "../../components/ui/button";
@@ -26,6 +27,7 @@ import { formatCurrency } from "../../helper/util";
 import { useAuth } from "../../context/AuthContext";
 import { getMyCourses } from "../../api/studentService";
 import { createPayment } from "../../api/paymentService";
+import { use } from "react";
 
 const CourseDetail = () => {
   const { id } = useParams();
@@ -37,6 +39,7 @@ const CourseDetail = () => {
   const [apiData, setApiData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [openPayment, setOpenPayment] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     const fetchCourse = async () => {
@@ -74,6 +77,28 @@ const CourseDetail = () => {
     
     fetchCourse();
   }, [id]);
+
+  useEffect(() => {
+    const status = searchParams.get("status");
+    const code = searchParams.get("code");
+    
+    if (status && code) {
+      if(status === "success") {
+        toast.success("Thanh toán thành công!, khóa học được kích hoạt");
+      } else if(status === "failed") {
+        toast.error("Thanh toán không thành công. Vui lòng thử lại");
+      } else if(status === "error") {
+        toast.error("Có lỗi xảy ra trong quá trình thanh toán. Vui lòng chờ");
+      }
+
+      if(status) {
+        const newParams = new URLSearchParams();
+        newParams.delete("status");
+        newParams.delete("code");
+        setSearchParams(newParams);
+      }
+    }
+  }, []);
 
   // Nếu đang load hoặc chưa có dữ liệu
   if (loading) return <div className="p-10 text-center">Đang tải dữ liệu khóa học...</div>;
@@ -128,6 +153,11 @@ const CourseDetail = () => {
   };
 
   const handleEnrollClick = () => {
+    if(!isLoggedIn) {
+      alert("Vui lòng đăng nhập trước khi ghi danh khóa học");
+      navigate("/login")
+      return;
+    }
     if(!isEnrolled) {
       // Thêm api fetch về BE để tạo enrollment cho khóa học
       // Đây là luồng khi chưa đăng ký vào khóa học

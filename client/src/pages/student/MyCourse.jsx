@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/ui/Header';
 import Footer from '../../components/ui/Footer';
 import CourseCard from '../../components/CourseCard';
 import pythonBanner from '../../assets/python-banner.png';
 import reactBanner from '../../assets/react-banner.png';
+import { getMyCourses } from '../../api/studentService';
 
 // Import file CSS vừa tạo
 import './MyCourse.css'; 
 
-const studentCourses = [
+const Mock_studentCourses = [
   {
     id: 1,
     title: 'Intro to Python',
@@ -31,6 +32,51 @@ const studentCourses = [
 ];
 
 const StudentMyCourses = () => {
+  const [studentCourses, setStudentCourses] = useState([]);
+        // Cấu trúc 1 phần tử trong mảng meta trả về 
+        // {
+        //     "enrollment_id": 6,
+        //     "student_id": 8,
+        //     "course_id": 1,
+        //     "enrolled_at": "2025-12-18T02:31:02.600Z",
+        //     "lesson_progress": {
+        //         "1": false,
+        //         "2": false,
+        //         "3": false
+        //     },
+        //     "courses": {
+        //         "course_id": 1,
+        //         "instructor_id": 1,
+        //         "title": "Lập trình Web Fullstack với NodeJS",
+        //         "description": "Khóa học toàn diện từ A-Z",
+        //         "price": "1500000",
+        //         "is_free": false,
+        //         "language": "Vietnamese",
+        //         "level": "intermediate",
+        //         "thumbnail_url": "thumb_node.jpg",
+        //         "estimated_duration_hours": null,
+        //         "rating": 4.7,
+        //         "review_count": 3,
+        //         "status": "published",
+        //         "created_at": "2025-11-19T08:28:44.686Z",
+        //         "instructor_name": "Nguyễn Văn Giáo"
+        //     }
+        // }
+  useEffect(() => {
+    const fetchStudentCourses = async () => {
+      try {
+        const response = await getMyCourses();
+        if(response && response.meta) {
+          setStudentCourses(response.meta);
+        }
+      } catch (error) {
+        console.error("Error fetching student courses:", error);
+      }
+    };
+
+    fetchStudentCourses();
+  }, [])
+
   return (
     <div className="dashboard-layout">
       <Header /> 
@@ -45,16 +91,17 @@ const StudentMyCourses = () => {
             
             {/* Sử dụng class courses-grid thay vì style inline để layout đẹp và responsive */}
             <div className="courses-grid">
-              {studentCourses.map((course) => (
+              {studentCourses.map((c) => (
                 <CourseCard 
-                  key={course.id}
-                  id={course.id} // Truyền ID để dùng cho việc điều hướng
-                  title={course.title}
-                  level={course.level}
-                  image={course.image}
-                  description={course.description}
-                  tag={course.tag}
-                  progress={course.progress}
+                  key={c.courses.course_id}
+                  id={c.courses.course_id} // Truyền ID để dùng cho việc điều hướng
+                  title={c.courses.title}
+                  // level={c.courses.level}
+                  image={c.courses.thumbnail_url}
+                  description={c.courses.description}
+                  tag={c.courses.level}
+                  progress={Math.round(Object.values(c.lesson_progress).filter(status => status === true).length / Object.values(c.lesson_progress).length * 100)}
+                  first_lesson_id={Object.keys(c.lesson_progress)[0]}
                 />
               ))}
             </div>

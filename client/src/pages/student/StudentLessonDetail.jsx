@@ -17,97 +17,121 @@ import {
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "../../components/ui/card";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "../../components/ui/accordion";
 import {
   ChevronLeft,
   FileText,
   Video,
   CheckSquare,
-  Download,
-  Clock,
   PlayCircle,
   CheckCircle,
   ChevronDown,
   ChevronRight,
-  Menu,
 } from "lucide-react";
 import Footer from "../../components/ui/Footer";
 import Header from "../../components/ui/Header";
 import "./StudentLessonDetail.css";
-
-// 🔥 Giả lập dữ liệu API trả về như cấu trúc bạn cung cấp
-const MOCK_COURSE_DATA = {
-  status: "OK",
-  code: 200,
-  message: "Lấy khóa học thành công",
-  meta: {
-    course_id: 4,
-    title: "NodeJS Masterclass",
-    description: "Khóa học Fullstack",
-    modules: [
-      {
-        module_id: 5,
-        title: "Chương 1: Khởi động",
-        lessons: [
-          { lesson_id: 7, title: "Cài đặt Node", duration: "10:00" },
-          { lesson_id: 8, title: "VS Code Setup", duration: "05:30" },
-        ],
-      },
-      {
-        module_id: 6,
-        title: "Chương 2: ExpressJS",
-        lessons: [
-          { lesson_id: 9, title: "Route là gì?", duration: "15:20" },
-          //   { lesson_id: 10, title: "HTTP Methods", duration: "12:45" } // Fake thêm để test
-        ],
-      },
-    ],
-  },
-};
+import { getCourseById } from "../../api/courseService";
+import { getEnrollment, updateProgress } from "../../api/studentService";
 
 const LessonDetail = () => {
   const { courseId, lessonId } = useParams();
   const navigate = useNavigate();
 
   // --- STATE ---
-  const [course, setCourse] = useState(MOCK_COURSE_DATA.meta);
-  const [activeLessonId, setActiveLessonId] = useState(parseInt(lessonId) || 7); // Mặc định bài đầu tiên
-  const [completedLessons, setCompletedLessons] = useState([]); // Giả sử bài 7 đã học xong
-  const [expandedModules, setExpandedModules] = useState([]); // Mở sẵn các chương
+  const [course, setCourse] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [updating, setUpdating] = useState(false);
+  const [showCongratModal, setShowCongratModal] = useState(false);
+  const [activeLessonId, setActiveLessonId] = useState(parseInt(lessonId) || 0);
+  
+  // Lưu danh sách ID các bài đã hoàn thành (được parse từ lesson_progress)
+  const [completedLessons, setCompletedLessons] = useState([]); 
+  
+  const [expandedModules, setExpandedModules] = useState([]); 
   const [openUpload, setOpenUpload] = useState(false);
-  const [uploadFile, setUploadFile] = useState(null);
 
-  // Tìm bài học hiện tại
+  // --- FETCH DATA ---
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!courseId) return;
+      try {
+        setLoading(true);
+
+        // 1. Gọi API lấy thông tin khóa học
+        const courseRes = await getCourseById(courseId);
+        if (courseRes && courseRes.meta) {
+          setCourse(courseRes.meta);
+          
+          // Mặc định mở chương đầu tiên nếu có
+          if (courseRes.meta.modules && courseRes.meta.modules.length > 0) {
+            setExpandedModules([courseRes.meta.modules[0].module_id]);
+          }
+        }
+
+        // 2. Gọi API lấy tiến độ học tập (Enrollment)
+        const enrollmentRes = await getEnrollment(courseId);
+        if (enrollmentRes && enrollmentRes.meta && enrollmentRes.meta.lesson_progress) {
+          const progressObj = enrollmentRes.meta.lesson_progress;
+          
+          const finishedIds = Object.keys(progressObj)
+            .filter((key) => progressObj[key] === true)
+            .map((key) => parseInt(key));
+            
+          setCompletedLessons(finishedIds);
+        }
+
+      } catch (error) {
+        console.error("Lỗi tải dữ liệu:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [courseId]);
+
+  // Sync URL params với State khi lessonId thay đổi trên URL
+  useEffect(() => {
+    if (lessonId) {
+      setActiveLessonId(parseInt(lessonId));
+    }
+  }, [lessonId]);
+
+  // ---Tìm bài học hiện tại dựa trên activeLessonId ---
   const currentLesson = useMemo(() => {
     if (!course || !course.modules) return null;
 
     for (const module of course.modules) {
-      const found = module.lessons.find(
-        (l) => String(l.lesson_id) === String(activeLessonId)
-      );
-      if (found) return { ...found, moduleTitle: module.title };
+      if (module.lessons) {
+        const found = module.lessons.find(
+          (l) => l.lesson_id === activeLessonId
+        );
+        if (found) return { ...found, moduleTitle: module.title };
+      }
     }
     return null;
   }, [course, activeLessonId]);
 
-  // Sync URL params với State
+  // Nếu chưa chọn bài nào (activeLessonId = 0) và dữ liệu đã tải xong,
+  // tự động chọn bài đầu tiên của chương đầu tiên.
   useEffect(() => {
-    if (lessonId) setActiveLessonId(parseInt(lessonId));
-  }, [lessonId]);
+    if (!loading && course && course.modules && activeLessonId === 0) {
+        const firstModule = course.modules[0];
+        if (firstModule && firstModule.lessons && firstModule.lessons.length > 0) {
+            const firstLessonId = firstModule.lessons[0].lesson_id;
+            handleLessonChange(firstLessonId);
+        }
+    }
+  }, [loading, course]);
+
 
   // --- HANDLERS ---
   const handleLessonChange = (id) => {
     setActiveLessonId(id);
-    navigate(`/course/${String(courseId)}/lesson/${id}`); // Update URL (Giả định route)
+    navigate(`/course/${courseId}/lesson/${id}`);
     window.scrollTo(0, 0);
   };
 
@@ -119,14 +143,55 @@ const LessonDetail = () => {
     );
   };
 
-  const handleMarkCompleted = () => {
-    if (!completedLessons.includes(activeLessonId)) {
-      setCompletedLessons([...completedLessons, activeLessonId]);
+  const handleMarkCompleted = async () => {
+    // Gọi API để đưa lên server.
+    // Cập nhật state ở Local
+    // Cho phép không cập nhật 
+    if(updating) return;
+
+    const isCurrentlyStatus = isCompleted(activeLessonId);
+    const newStatus = !isCurrentlyStatus;
+
+    try {
+      setUpdating(true);
+
+      const payload = {
+        courseId: courseId,
+        lessonId: activeLessonId,
+        isCompleted: newStatus,
+      }
+
+      await updateProgress(payload);
+
+      if(newStatus) {
+        // Khi bài học đã được cập nhật thành công và hoàn thành
+        const newCompletedList = [...completedLessons, activeLessonId];
+        setCompletedLessons(newCompletedList);
+
+        if(newCompletedList.length === getTotalLessons()) {
+          // Hiển thị modal thông báo học khóa học thành công
+          setShowCongratModal(true);
+        }
+      } else {
+        // Xóa khỏi danh sách hoàn thành.
+        setCompletedLessons((prev) => prev.filter((id) => id !== activeLessonId));
+      }
+    } catch (error) {
+      console.error("Lỗi cập nhật tiến độ:", error);
+      alert("Có lỗi xảy ra khi cập nhật tiến độ học tập!");
+    } finally {
+      setUpdating(false);
     }
-    // Logic: Tự động chuyển bài tiếp theo (Optional)
+
   };
 
   const isCompleted = (id) => completedLessons.includes(id);
+
+  // Hàm tính tổng số bài học
+  const getTotalLessons = () => {
+    if (!course || !course.modules) return 0;
+    return course.modules.reduce((acc, m) => acc + (m.lessons ? m.lessons.length : 0), 0);
+  };
 
   // --- RENDER SIDEBAR ---
   const renderSidebar = () => (
@@ -134,13 +199,12 @@ const LessonDetail = () => {
       <div className="sidebar-header">
         <h2 className="course-name">{course.title}</h2>
         <p className="progress-text">
-          Hoàn thành {completedLessons.length}/
-          {course.modules.reduce((acc, m) => acc + m.lessons.length, 0)} bài học
+          Hoàn thành {completedLessons.length}/{getTotalLessons()} bài học
         </p>
       </div>
 
       <div className="sidebar-content">
-        {course.modules.map((module) => (
+        {course.modules?.map((module) => (
           <div key={module.module_id} className="module-group">
             <div
               className="module-header"
@@ -158,7 +222,7 @@ const LessonDetail = () => {
 
             {expandedModules.includes(module.module_id) && (
               <div className="module-lessons">
-                {module.lessons.map((lesson) => (
+                {module.lessons?.map((lesson) => (
                   <div
                     key={lesson.lesson_id}
                     className={`sidebar-lesson-item ${
@@ -176,7 +240,10 @@ const LessonDetail = () => {
                     <div className="lesson-info-side">
                       <p className="lesson-name">{lesson.title}</p>
                       <span className="lesson-duration">
-                        {lesson.duration || "10:00"}
+                        {/* API trả về duration_minutes hoặc estimated_duration_hours có thể null */}
+                        {lesson.estimated_duration_hours 
+                            ? `${lesson.estimated_duration_hours}h` 
+                            : "Video"}
                       </span>
                     </div>
                   </div>
@@ -189,7 +256,12 @@ const LessonDetail = () => {
     </aside>
   );
 
-  if (!currentLesson) return <div>Đang tải bài học...</div>;
+  // --- LOADING / NULL CHECKS ---
+  if (loading) return <div className="p-8">Đang tải dữ liệu khóa học...</div>;
+  if (!course) return <div className="p-8">Không tìm thấy thông tin khóa học.</div>;
+  
+  // Trường hợp course load xong nhưng chưa xác định được currentLesson (ví dụ ID trên URL sai)
+  if (!currentLesson && activeLessonId !== 0) return <div className="p-8">Không tìm thấy bài học này.</div>;
 
   return (
     <div className="learning-layout">
@@ -210,7 +282,7 @@ const LessonDetail = () => {
             <ChevronLeft className="h-4 w-4 mr-1" /> Thoát
           </Button>
           <span className="header-breadcrumbs">
-            {course.title} / {currentLesson.moduleTitle} / {currentLesson.title}
+            {course.title} / {currentLesson?.moduleTitle} / {currentLesson?.title}
           </span>
         </header>
 
@@ -220,35 +292,35 @@ const LessonDetail = () => {
             <div className="video-placeholder-large">
               <Video className="h-20 w-20 text-white opacity-80" />
               <p className="text-white mt-4 font-medium">
-                Video Player: {currentLesson.title}
+                Video Player: {currentLesson?.title}
               </p>
             </div>
           </div>
 
           {/* Title & Action */}
           <div className="lesson-control-bar">
-            <h1 className="current-lesson-title">{currentLesson.title}</h1>
+            <h1 className="current-lesson-title">{currentLesson?.title}</h1>
             <Button
+              disabled={updating}
               className={`mark-complete-btn ${
                 isCompleted(activeLessonId) ? "completed" : ""
               }`}
               onClick={handleMarkCompleted}
             >
-              {isCompleted(activeLessonId) ? (
+              {updating ? (<>Đang lưu quá trình...</>) 
+              : isCompleted(activeLessonId) ? (
                 <>
-                  {" "}
-                  <CheckCircle className="mr-2 h-4 w-4" /> Đã hoàn thành{" "}
+                  <CheckCircle className="mr-2 h-4 w-4" /> Đã hoàn thành
                 </>
               ) : (
                 <>
-                  {" "}
-                  <CheckSquare className="mr-2 h-4 w-4" /> Đánh dấu hoàn thành{" "}
+                  <CheckSquare className="mr-2 h-4 w-4" /> Đánh dấu hoàn thành
                 </>
               )}
             </Button>
           </div>
 
-          {/* Tabs Content (Giữ lại logic cũ của bạn) */}
+          {/* Tabs Content */}
           <Tabs defaultValue="description" className="w-full mt-8">
             <TabsList className="lesson-tabs">
               <TabsTrigger value="description">Mô tả & Tài liệu</TabsTrigger>
@@ -263,18 +335,16 @@ const LessonDetail = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    Đây là nội dung chi tiết cho bài học{" "}
-                    <b>{currentLesson.title}</b>. Trong bài này chúng ta sẽ tìm
-                    hiểu về các khái niệm cơ bản...
+                    {currentLesson?.description || "Chưa có mô tả cho bài học này."}
                   </p>
 
-                  {/* Mock Documents */}
+                  {/* Mock Documents - Phần này giữ nguyên vì API chưa có field documents */}
                   <div className="mt-6">
                     <h3 className="font-semibold mb-3">Tài liệu đính kèm</h3>
                     <div className="doc-item">
                       <div className="doc-info">
                         <FileText className="h-5 w-5 text-primary" />
-                        <span>Slide_Bai_Giang.pdf</span>
+                        <span>Tai_lieu_tham_khao.pdf</span>
                       </div>
                       <Button variant="outline" size="sm">
                         Tải xuống
@@ -292,11 +362,10 @@ const LessonDetail = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-gray-500 mb-4">
-                    Hoàn thành bài tập để mở khóa bài tiếp theo.
+                    Nộp bài tập thực hành cho bài học này (nếu có yêu cầu).
                   </p>
-                  {/* Reuse Accordion Logic cũ của bạn ở đây nếu cần */}
                   <Button
-                    onClick={() => setOpenUpload(1)}
+                    onClick={() => setOpenUpload(true)}
                     className="submit-btn"
                   >
                     Nộp bài ngay
@@ -311,7 +380,7 @@ const LessonDetail = () => {
                   <CardTitle>Thảo luận khóa học</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>Thảo luận khóa học sẽ được thêm vào sau</p>
+                  <p>Tính năng thảo luận đang được phát triển.</p>
                 </CardContent>
               </Card>
             </TabsContent>
@@ -321,8 +390,8 @@ const LessonDetail = () => {
         <Footer />
       </main>
 
-      {/* Dialog Nộp bài (Giữ nguyên logic cũ) */}
-      <Dialog open={openUpload !== false} onOpenChange={setOpenUpload}>
+      {/* Dialog Nộp bài */}
+      <Dialog open={openUpload} onOpenChange={setOpenUpload}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Nộp bài tập</DialogTitle>
@@ -336,6 +405,42 @@ const LessonDetail = () => {
               }}
             >
               Nộp bài
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Dialog thông báo hoàn thành khóa học */}
+      <Dialog open={showCongratModal} onOpenChange={setShowCongratModal}>
+        <DialogContent className="sm:max-w-md text-center">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-center text-primary">
+              Xin chúc mừng! 🎉
+            </DialogTitle>
+          </DialogHeader>
+          
+          <div className="py-4">
+            <p className="text-lg font-medium text-gray-700">
+              Bạn đã hoàn thành xuất sắc khóa học <br/>
+              <span className="text-blue-600">"{course.title}"</span>
+            </p>
+            <p className="text-sm text-gray-500 mt-2">
+              Bạn đã nỗ lực rất nhiều. Hãy tiếp tục giữ vững tinh thần học tập này nhé!
+            </p>
+          </div>
+
+          <DialogFooter className="sm:justify-center gap-2">
+            <Button 
+              variant="outline" 
+              onClick={() => setShowCongratModal(false)}
+            >
+              Ở lại xem lại bài
+            </Button>
+            <Button 
+              className="bg-green-600 hover:bg-green-700"
+              onClick={() => navigate('/student/my-courses')}
+            >
+              Về danh sách khóa học
             </Button>
           </DialogFooter>
         </DialogContent>

@@ -19,6 +19,7 @@ const Register = () => {
     email: '',
     password: '',
     confirmPassword: '',
+    role: 'student'
   });
 
   const [errors, setErrors] = useState({});
@@ -62,7 +63,7 @@ const Register = () => {
       email: formData.email,
       password: formData.password,
       confirmPassword: formData.confirmPassword,
-      role: formData.role || 'student'
+      role: formData.role === "instructor" ? "instructor" : "student"
     };
 
     const result = await register(payload);
@@ -89,8 +90,28 @@ const Register = () => {
         {/* Form */}
         <form className="register-form" onSubmit={handleSubmit}>
           <input type="email" placeholder="Email" value={formData.email} onChange={handleChange} name="email" required />
+          {errors.email && <span className="error-text">{errors.email}</span>}
           <input type="password" placeholder="Password" value={formData.password} onChange={handleChange} name="password" required />
+          {errors.password && <span className="error-text">{errors.password}</span>}
           <input type="password" placeholder="Confirm your password" value={formData.confirmPassword} onChange={handleChange} name="confirmPassword" required />
+          {errors.confirmPassword && <span className="error-text">{errors.confirmPassword}</span>}
+
+          <div className="role-select-container">
+            <label htmlFor="role" className="role-label">
+              Select Role:
+            </label>
+            <select
+              id="role"
+              name="role"
+              value={formData.role}
+              onChange={handleChange}
+              className="register-input-select"
+            >
+              <option value="student">Student (Học viên)</option>
+              <option value="instructor">Instructor (Giảng viên)</option>
+            </select>
+          </div>
+
           <button type="submit" className="btn-email">
             Create account
           </button>

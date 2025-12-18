@@ -49,3 +49,49 @@ export const getMyCourses = async () => {
 
   return response.data;
 }
+
+export const reviewCourse = async (data) => {
+  const token = sessionStorage.getItem('token');
+
+  if(!token) {
+    throw new Error("No access token found");
+  }
+  const response = await axios.post(`${API_URL}/student/reviews`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+
+  return response.data;
+}
+
+export const getEnrollment = async (id) => {
+  const token = sessionStorage.getItem('token');
+
+  if(!token) {
+    throw new Error("No access token found");
+  }
+
+  const response = await axios.get(`${API_URL}/student/enrollments/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+
+  return response.data;
+}
+
+export const updateProgress = async (data) => {
+  const token = sessionStorage.getItem('token');
+
+  if(!token) {
+    throw new Error("No access token found");
+  }
+  const response = await axios.patch(`${API_URL}/student/progress`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+
+  return response.data;
+}
