@@ -16,7 +16,8 @@ const Sidebar = ({ activePage, role = 'tutor' }) => {
           <>
             <Link to="/tutor/dashboard" style={{ textDecoration: 'none' }}><div className={`menu-item ${activePage === 'dashboard' ? 'active' : ''}`}>Dashboard</div></Link>
             <Link to="/tutor/add-course" style={{ textDecoration: 'none' }}><div className={`menu-item ${activePage === 'add-course' ? 'active' : ''}`}>Add course</div></Link>
-            <Link to="/tutor/my-course" style={{ textDecoration: 'none' }}><div className={`menu-item ${activePage === 'my-course' ? 'active' : ''}`}>My course</div></Link>
+            {/* <Link to="/tutor/my-courses" style={{ textDecoration: 'none' }}><div className={`menu-item ${activePage === 'my-course' ? 'active' : ''}`}>My course</div></Link> */}
+            <Link to="/tutor/profile" style={{ textDecoration: 'none' }}><div className={`menu-item ${activePage === 'profile' ? 'active' : ''}`}>Profile</div></Link>
           </>
         )}
 
@@ -32,11 +33,6 @@ const Sidebar = ({ activePage, role = 'tutor' }) => {
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" style={iconStyle}><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg> My Courses
               </div>
             </Link>
-            {/* <Link to="/student/setting" style={{ textDecoration: 'none' }}>
-              <div className={`menu-item ${activePage === 'setting' ? 'active' : ''}`} style={{display: 'flex', alignItems: 'center'}}>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" style={iconStyle}><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg> Setting
-              </div>
-            </Link> */}
           </>
         )}
 
@@ -48,12 +44,12 @@ const Sidebar = ({ activePage, role = 'tutor' }) => {
                 Course Approval
               </div>
             </Link>
-            <Link to="/admin/tutor-requests" style={{ textDecoration: 'none' }}>
+            {/* <Link to="/admin/tutor-requests" style={{ textDecoration: 'none' }}>
               <div className={`menu-item ${activePage === 'tutor-request' ? 'active' : ''}`} style={{display: 'flex', alignItems: 'center'}}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" style={iconStyle}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                 Tutor Requests
               </div>
-            </Link>
+            </Link> */}
           </>
         )}
       </nav>

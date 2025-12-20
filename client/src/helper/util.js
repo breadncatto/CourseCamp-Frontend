@@ -33,4 +33,33 @@ function toDateInputValue(date) {
     return isNaN(d.getTime()) ? '' : d.toISOString().split("T")[0];
 }
 
-export { formatDate, formatInputDate, skillsToString, stringToSkills, formatCurrency, toDateInputValue };
+// Hàm chuyển đổi dữ liệu thô từ API sang format của CourseCard
+const mapCoursesData = (apiData) => {
+  if (!Array.isArray(apiData)) return [];
+
+  return apiData.map((course) => ({
+    id: course.course_id,
+    title: course.title,
+    level: course.level.charAt(0).toUpperCase() + course.level.slice(1),
+    price: parseInt(course.price, 10),
+    image: course.thumbnail_url, 
+    description: course.description,
+    tag: course.category_name && course.category_name.length > 0 
+          ? course.category_name[0] 
+          : 'General',
+    status: course.status
+  }));
+};
+
+const mapStudentData = (apiData) => {
+    if (!Array.isArray(apiData)) return [];
+
+    // id: 1, full_name: 'Nguyễn Minh Tuấn', email: 'tuan.nguyen@email.com', ranking: 'Gold' 
+    return apiData.map((student) => ({
+        id: student.user_id,
+        full_name: student.full_name,
+        email: student.email,
+        ranking: student.ranking
+    }))
+}
+export { formatDate, formatInputDate, skillsToString, stringToSkills, formatCurrency, toDateInputValue, mapCoursesData, mapStudentData };

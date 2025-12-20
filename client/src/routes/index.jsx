@@ -9,12 +9,14 @@ import Register from "../pages/public/Register";
 import LessonDetail from "../pages/student/StudentLessonDetail";
 import TutorDashboard from "../pages/tutor/Dashboard";
 import TutorAddCourse from "../pages/tutor/AddCourse";
+import TutorProfile from "../pages/tutor/Profile";
 import TutorMyCourse from "../pages/tutor/MyCourse";
 import StudentProfile from "../pages/student/Profile";
 import StudentMyCourses from "../pages/student/MyCourse";
 import BecomeTutor from "../pages/student/BecomeTutor"; 
 import CourseApproval from "../pages/admin/CourseApproval";
 import TutorRequest from "../pages/admin/TutorRequest"; 
+import AuthCallback from "../callback/AuthCallback.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx";
 function AppRoutes() {
   return (
@@ -25,13 +27,15 @@ function AppRoutes() {
         <Route path="/register" element={<Register/>}/>
         <Route path="/course/:id" element={<CourseDetail/>}/>
         <Route path="/course-list" element={<CourseList/>}/>
+        <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/course/:courseId/lesson/:lessonId" element={<LessonDetail />} />
         
         {/* TUTOR ROUTES */}
         <Route element={<ProtectedRoute allowedRoles={["instructor"]} />}>
             <Route path="/tutor/dashboard" element={<TutorDashboard />} />
             <Route path="/tutor/add-course" element={<TutorAddCourse />} />
-            <Route path="/tutor/my-courses" element={<TutorMyCourse />} />
+            {/* <Route path="/tutor/my-courses" element={<TutorMyCourse />} /> */}
+            <Route path="/tutor/profile" element={<TutorProfile />} />
         </Route>
         
         {/* STUDENT ROUTES */}

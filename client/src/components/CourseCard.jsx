@@ -6,16 +6,31 @@ import { reviewCourse } from '../api/studentService';
 
 // Component đánh giá sao
 
-const CourseCard = ({ id, title, level, price, image, description, tag, progress, first_lesson_id }) => {
+const CourseCard = ({ id, title, level, price, image, description, tag, progress, first_lesson_id, status }) => {
+  const { user } = useAuth();
   const navigate = useNavigate(); // Hook chuyển trang
-  const isStudentCard = progress !== undefined;
+  const isStudentCard = user.role === 'student';
   // State quản lý chế độ Review (Modal ngay trong card)
   const [isReviewing, setIsReviewing] = useState(false);
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [reviewText, setReviewText] = useState('');
 
-  // const { user } = useAuth();
+  const getStatusStyle = (status) => {
+    switch (status?.toLowerCase()) {
+      case 'published':
+        return { bg: '#d1fae5', color: '#065f46', border: '1px solid #a7f3d0' }; // Xanh lá
+      case 'pending':
+        return { bg: '#fef3c7', color: '#92400e', border: '1px solid #fde68a' }; // Vàng cam
+      case 'draft':
+        return { bg: '#fee2e2', color: '#b91c1c', border: '1px solid #fecaca' }; // Đỏ
+      default:
+        return { bg: '#f3f4f6', color: '#374151', border: '1px solid #e5e7eb' }; // Xám mặc định
+    }
+  };
+
+  const statusStyle = getStatusStyle(status);
+
   const handleCloseReview = () => {
     setIsReviewing(false);
     setHoverRating(0);
@@ -65,6 +80,26 @@ const CourseCard = ({ id, title, level, price, image, description, tag, progress
       {/* Hình ảnh */}
       <div style={{ position: 'relative', height: '180px', marginBottom: '16px' }}>
         <img src={image} alt={title} style={{ width: '100%', height: '100%', borderRadius: '8px', objectFit: 'cover' }} />
+        {status && (
+          <span style={{
+            position: 'absolute',
+            top: '8px',
+            right: '8px',
+            backgroundColor: statusStyle.bg,
+            color: statusStyle.color,
+            border: statusStyle.border,
+            padding: '4px 10px',
+            borderRadius: '20px',
+            fontSize: '11px',
+            fontWeight: '700',
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+            zIndex: 10
+          }}>
+            {status}
+          </span>
+        )}
       </div>
       
       {/* Tag và Level */}

@@ -15,7 +15,7 @@ import { useAuth } from "../../context/AuthContext";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useAuth(); 
+  const { login, user } = useAuth(); 
   const navigate = useNavigate();
 
   // --- HÀM XỬ LÝ ĐĂNG NHẬP ---
@@ -23,11 +23,21 @@ const Login = () => {
     e.preventDefault(); // Ngăn form reload lại trang
 
     try {
-      const response = await login(email, password); // Nếu thành công thì token đã được useAuth lưu rồi
+      const result = await login(email, password); // Nếu thành công thì token đã được useAuth lưu rồi
 
-      if (response) {
+      // Chuyển hướng người dùng đến các trang tương ứng với chức năng của họ
+      // const role = response.data.meta.role;
+      const role = result.role;
+      if (result) {
         alert("Đăng nhập thành công!");
-        navigate("/"); 
+
+        if(role === "instructor") {
+          navigate("/tutor/dashboard");
+        } else if(role === "student") {
+          navigate("/");
+        } else if(role === "admin") {
+          navigate("/admin/approval")
+        }
       }
     } catch (error) {
       console.error("Lỗi đăng nhập:", error);
@@ -35,6 +45,12 @@ const Login = () => {
     }
   };
 
+  const handleGoogleLogin = async (e) => {
+    e.preventDefault();
+
+    window.location.href = "http://localhost:3000/api/auth/google";
+    // Chuyển hướng về trang này, BE tự render trang google
+  }
   return (
     <div className="login-page">
       <div className="login-box">
@@ -70,7 +86,7 @@ const Login = () => {
         </div>
 
         {/* Google Login */}
-        <button className="btn-google">
+        <button className="btn-google" onClick={handleGoogleLogin}>
           <img
             src={googleLogo}   // ✅ dùng ảnh trong dự án của bạn
             alt="Google"

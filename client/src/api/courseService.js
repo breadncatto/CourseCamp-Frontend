@@ -15,3 +15,8 @@ export const getCourseById = async (id) => {
         throw error;
     }
 }
+
+export const getCategories = async () => {
+    const response = await axios.get(`${API_URL}/courses/categories`);
+    return response.data;
+};

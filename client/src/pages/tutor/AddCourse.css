@@ -54,3 +54,116 @@ textarea.form-control { resize: none; height: 150px; }
   .main-content { margin-left: 0; }
   .form-row { flex-direction: column; gap: 10px; }
 }
+
+/* ... Giữ nguyên các class cũ ... */
+
+/* --- Cập nhật & Style mới --- */
+
+.card {
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  margin-bottom: 24px;
+}
+
+.form-card h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: #2c3e50;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+/* Curriculum Section */
+.curriculum-section {
+  margin-top: 40px;
+}
+
+.section-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+/* Module Styling */
+.module-card {
+  border-left: 5px solid var(--primary-color, #2563eb);
+  background-color: #f8fafc;
+}
+
+.module-header {
+  display: flex;
+  align-items: flex-end;
+  gap: 15px;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 8px;
+  border-radius: 4px;
+}
+.btn-icon:hover { background-color: #ffe4e6; } /* Red hover */
+
+/* Lesson Styling */
+.lessons-container {
+  padding-left: 20px;
+}
+
+.lesson-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.lesson-number {
+  font-size: 13px;
+  color: #64748b;
+  width: 70px;
+  font-weight: 600;
+}
+
+.lesson-title { flex: 3; }
+.lesson-duration { flex: 1; max-width: 100px; }
+
+.btn-icon.delete-small {
+  font-size: 14px;
+  color: #ef4444;
+}
+
+.btn-text-only {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  padding: 5px 10px;
+}
+.btn-text-only:hover { text-decoration: underline; background-color: #eff6ff; border-radius: 4px; }
+
+.btn-secondary {
+  background-color: #475569;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Responsive adjustment */
+@media (max-width: 768px) {
+  .lesson-row { flex-wrap: wrap; }
+  .lesson-title { width: 100%; flex: none; }
+  .lesson-duration { flex: 1; }
+}

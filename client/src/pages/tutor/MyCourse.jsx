@@ -1,7 +1,7 @@
 import React from 'react';
 import Sidebar from '../../components/Sidebar';
 import CourseCard from '../../components/CourseCard';
-import Footer from '../../components/Footer';
+import Footer from '../../components/ui/Footer';
 import Header from '../../components/Header';
 import './MyCourse.css';
 import pythonBanner from '../../assets/python-banner.png';
