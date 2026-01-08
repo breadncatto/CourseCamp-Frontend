@@ -125,7 +125,7 @@ const CourseDetail = () => {
     price: apiData.price ? Number(apiData.price).toLocaleString('vi-VN') + " VND" : "Liên hệ",
     enrolled: 67, // API chưa có trường này, giữ mock
     level: apiData.level || "Beginner",
-    rating: apiData.rating || 0,
+    rating: Math.round(apiData.rating, 2) || 0,
     reviews: apiData.reviews?.length || 0,
     reviewsList: apiData.reviews || [],
     description: apiData.description || "Chưa có mô tả cho khóa học này.",

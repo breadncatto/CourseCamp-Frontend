@@ -2,7 +2,8 @@ import React, { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import hook điều hướng
 import { useAuth } from '../context/AuthContext';
 import ReviewContent from './ReviewContent';
-import { reviewCourse } from '../api/studentService';
+import { reviewCourse, deleteCourse } from '../api/studentService';
+import { deleteCourseById } from '../api/instructorService';
 
 // Component đánh giá sao
 
@@ -74,6 +75,23 @@ const CourseCard = ({ id, title, level, price, image, description, tag, progress
     navigate(`/course/${id}/lesson/${first_lesson_id}`);
   };
 
+  const handleDeleteCourse = async () => {
+    try {
+      const isConfirmed = window.confirm("Bạn có chắc chắn muốn xóa khóa học này không? Hành động này không thể hoàn tác.");
+
+      if (!isConfirmed) return;
+      if(user.role === "student") {
+        await deleteCourse(id);
+      } else if(user.role === "instructor") {
+        await deleteCourseById(id);
+      }
+      alert("Xóa khóa học thành công");
+      window.location.reload();
+    } catch(error) {
+      console.error("Lỗi khi xóa khóa học:", error);
+      alert("Xóa khóa học thất bại. Vui lòng thử lại.");
+    }
+  }
   // --- CONTENT CHÍNH CỦA CARD ---
   const NormalContent = () => (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -150,6 +168,11 @@ const CourseCard = ({ id, title, level, price, image, description, tag, progress
               >
                 ⭐ Rate
               </button>
+              <button 
+                className='btn-delete'
+                onClick={handleDeleteCourse}>
+                  Delete
+              </button>
             </div>
           </>
         ) : (
@@ -157,6 +180,10 @@ const CourseCard = ({ id, title, level, price, image, description, tag, progress
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px' }}>
             <span style={{ fontWeight: 'bold', fontSize: '18px', color: '#5b84c1' }}>{price ? price.toLocaleString() : 0} VND</span>
             <button className="btn btn-primary" style={{ padding: '10px 20px', border: 'none', borderRadius: '8px', background: '#5b84c1', color: '#fff', cursor: 'pointer', fontWeight: '600' }}>Manage</button>
+            {/* {user.role === 'instructor' && (<button 
+              className="btn-delete"
+              onClick={handleDeleteCourse}>Delete</button>
+            )} */}
           </div>
         )}
       </div>

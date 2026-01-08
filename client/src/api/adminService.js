@@ -9,7 +9,7 @@ export const getPendingCourses = async () => {
       throw new Error("No access token found");
     }
 
-    const response = await axios.get(`${API_URL}/admin/courses/pending`, {
+    const response = await axios.get(`${API_URL}/admin/courses/pending` , {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -25,10 +25,10 @@ export const approveCourse = async (id) => {
       throw new Error("No access token found");
     }
 
-    const response = await axios.post(`${API_URL}/admin/courses/${id}/approve`, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
+    const response = await axios.post(`${API_URL}/admin/courses/${id}/approve`, null, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
     });
 
     return response.data;
@@ -42,10 +42,10 @@ export const rejectCourse = async (id) => {
       throw new Error("No access token found");
     }
 
-    const response = await axios.post(`${API_URL}/admin/courses/${id}/reject`, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
+    const response = await axios.post(`${API_URL}/admin/courses/${id}/reject`, null, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
     });
 
     return response.data;

@@ -69,3 +69,20 @@
   border-color: #5b84c1;
   color: #5b84c1;
 }
+
+.btn-delete {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid #DC2626;
+  background-color: #FEE2E2;
+  color: #DC2626;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-delete:hover {
+  border-color: #B91C1C;
+  color: #FFFFFF;
+  background-color: #B91C1C;
+}

@@ -98,3 +98,19 @@ export const updateProfile = async (data) => {
 
   return response.data;
 }
+
+export const deleteCourseById = async (id) => {
+  const token = sessionStorage.getItem('token');
+
+  if(!token) {
+    throw new Error("No access token found");
+  }
+
+  const response = await axios.delete(`${API_URL}/instructor/courses/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+
+  return response.data;
+}
