@@ -161,7 +161,7 @@ const HomePage = () => {
                 <p>{c.description}</p>
                 <div className="course-footer">
                   <span className="price">{formatCurrency(c.price)}</span>
-                  <Link to="/course/:id"><button className="btn small">Details</button></Link>
+                  <Link to={"/course/" + c.course_id}><button className="btn small">Details</button></Link>
                 </div>
               </div>
             </div>
