@@ -42,15 +42,9 @@ const MyCourse = () => {
               <p className="subtitle">Manage all your created courses</p>
             </div>
             <div className="courses-grid">
-              {myCourses.map((course) => (
+              {myCourses.map((courseData) => (
                 <CourseCard 
-                  key={course.id}
-                  title={course.title}
-                  level={course.level}
-                  price={course.price}
-                  image={course.image}
-                  description={course.description}
-                  tag={course.tag}
+                  course={courseData}
                 />
               ))}
             </div>

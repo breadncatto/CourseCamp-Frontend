@@ -28,16 +28,18 @@
 
   const ReviewContent = (
     {
-    rating,
-    setRating,
-    hoverRating,
-    setHoverRating,
-    reviewText,
-    setReviewText,
-    handleCloseReview,
-    handleSubmitReview
+      reviewState
     }
-  ) => (
+  ) => {
+    const { rating,
+            setRating,
+            hoverRating,
+            setHoverRating,
+            reviewText,
+            setReviewText,
+            handleCloseReview,
+            handleSubmitReview } = reviewState;
+    return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '0 8px', animation: 'fadeIn 0.3s' }}>
       <h3 style={{ textAlign: 'center', marginBottom: '8px', fontSize: '20px', color: '#333' }}>Your Feedback</h3>
       <p style={{ textAlign: 'center', marginBottom: '24px', color: '#666', fontSize: '14px' }}>How was your experience?</p>
@@ -57,6 +59,6 @@
         <button onClick={handleSubmitReview} style={{ padding: '8px 32px', border: 'none', borderRadius: '8px', background: '#5b84c1', color: 'white', cursor: 'pointer', fontWeight: '600', boxShadow: '0 4px 6px rgba(91, 132, 193, 0.2)' }}>Submit</button>
       </div>
     </div>
-  );
+  )};
 
   export default ReviewContent;

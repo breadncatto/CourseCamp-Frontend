@@ -7,7 +7,8 @@ import { deleteCourseById } from '../api/instructorService';
 
 // Component đánh giá sao
 
-const CourseCard = ({ id, title, level, price, image, description, tag, progress, first_lesson_id, status }) => {
+const CourseCard = (course) => {
+  const { id, title, level, price, image, description, tag, progress, first_lesson_id, status } = course;
   const { user } = useAuth();
   const navigate = useNavigate(); // Hook chuyển trang
   const isStudentCard = user.role === 'student';
@@ -213,7 +214,7 @@ const CourseCard = ({ id, title, level, price, image, description, tag, progress
         e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.05)';
       }}
     >
-      {isReviewing ? <ReviewContent rating={rating} setRating={setRating} hoverRating={hoverRating} setHoverRating={setHoverRating} reviewText={reviewText} setReviewText={setReviewText} handleCloseReview={handleCloseReview} handleSubmitReview={handleSubmitReview}/>
+      {isReviewing ? <ReviewContent reviewState={{rating, setRating, hoverRating, setHoverRating, reviewText, setReviewText, handleCloseReview, handleSubmitReview}}/>
        : <NormalContent />}
     </div>
   );
