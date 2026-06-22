@@ -1,11 +1,10 @@
-```markdown
 # 🎓 Online Course Platform - Frontend
 
 A responsive, scalable, and dynamic frontend interface for an online course platform built with **React 19**, **Vite**, and **Tailwind CSS**. The system implements role-based user interfaces (RBAC) for Admin, Tutor, and Student roles, providing a seamless educational and management experience.
 
 > **📢 Team Project Shoutout:** > This frontend application is part of a comprehensive team project (Software Engineering Course). While the project was built collaboratively, **the features and pages highlighted in the "My Contributions" section below were solely developed by me.** For the backend implementation, please check out our [Backend Repository](#) (link to your team's BE repo).
 
-![Demo GIF](https://github.com/user-attachments/assets/85d1ca79-e58e-48f7-a3c4-d5ce33b69d40)
+<img width="426" height="240" alt="Image" src="https://github.com/user-attachments/assets/2f638e5a-f8d9-4741-a179-12befb50050f" />
 
 ## 📋 Table of Contents
 - [Overview](#overview)
