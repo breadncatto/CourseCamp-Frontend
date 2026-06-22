@@ -5,7 +5,7 @@ A responsive, scalable, and dynamic frontend interface for an online course plat
 
 > **📢 Team Project Shoutout:** > This frontend application is part of a comprehensive team project (Software Engineering Course). While the project was built collaboratively, **the features and pages highlighted in the "My Contributions" section below were solely developed by me.** For the backend implementation, please check out our [Backend Repository](#) (link to your team's BE repo).
 
-<img width="426" height="240" alt="Image" src="https://github.com/user-attachments/assets/85d1ca79-e58e-48f7-a3c4-d5ce33b69d40" />
+![Demo GIF](https://github.com/user-attachments/assets/85d1ca79-e58e-48f7-a3c4-d5ce33b69d40)
 
 ## 📋 Table of Contents
 - [Overview](#overview)
