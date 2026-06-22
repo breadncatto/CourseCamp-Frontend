@@ -205,8 +205,3 @@ git push origin feature/tutor-dashboard
 **Last Updated**: June 2026
 
 **Maintained by**: DATH Team
-
-
-```
-
-```
